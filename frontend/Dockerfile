@@ -1,6 +1,6 @@
 FROM node:14-alpine
 
-WORKDIR /credit-score-bank
+WORKDIR /frontend
 
 COPY package.json ./
 
