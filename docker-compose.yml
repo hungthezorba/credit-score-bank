@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+
+  web:
+    container_name: credit-score-bank-frontend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/credit-score-bank'
+      - '/credit-score-bank/node_modules'
+    ports:
+      - 3001:3000
+    environment:
+      - CHOKIDAR_USEPOLLING=true
