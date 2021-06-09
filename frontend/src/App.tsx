@@ -3,6 +3,7 @@ import './App.css';
 import Navbar from './components/Navbar'
 import { ChakraProvider } from "@chakra-ui/react"
 import Login from './pages/Login';
+import Result from './pages/Result';
 import {
   BrowserRouter as Router,
   Switch,
@@ -29,7 +30,8 @@ function App() {
           <Navbar/>
           <Switch>
             <Route path="/" exact>
-              <Login/>
+              {/* <Login/> */}
+              <Result />
             </Route>
           </Switch>
         </Router>
