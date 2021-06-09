@@ -1,7 +1,13 @@
 
 import { Text, Link, Stack, Box } from "@chakra-ui/react";
+import { useContext } from 'react'
+import AppContext from '../store/AppContext'
 
-const NavigationItem = ({ children, isLast, to = "/", ...rest }) => {
+interface NavigationItemProps {
+  to: string
+}
+
+const NavigationItem:React.FC<NavigationItemProps> = ({ children, to = "/", ...rest }) => {
   return (
     <Link href={to}>
       <Text display="block" {...rest}>
@@ -11,7 +17,15 @@ const NavigationItem = ({ children, isLast, to = "/", ...rest }) => {
   );
 };
 
-const NavigationStack = ({isOpen}) => {
+interface NavigationStackProps {
+  isOpen: boolean
+}
+
+const NavigationStack:React.FC<NavigationStackProps> = ({isOpen}) => {
+
+  const state = useContext(AppContext)
+
+
   return (
     <Box
     display={{ base: isOpen ? "block" : "none", md: "block" }}

@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import * as styles from './navbar.module.css'
+import React, { useState, useContext } from "react";
 import { Flex, Spacer, Box, Button, Heading } from "@chakra-ui/react";
 import NavigationStack from "./NavigationStack";
 import MenuToggle from "./MenuToggle";
 import Logo from './Logo'
+import AppContext from '../store/AppContext'
 
-const NavBarContainer = ({ children, ...props }) => {
+const NavBarContainer:React.FC = ({children}) => {
     return (
       <Flex
         as="nav"
@@ -17,20 +17,20 @@ const NavBarContainer = ({ children, ...props }) => {
         px={20}
         py={5}
         style={{backgroundColor: 'white', color: 'black', borderBottomColor: '#ccc', borderBottomWidth: 1}}
-        {...props}
       >
         {children}
       </Flex>
     )
   }
 
-const Navbar = (props) => {
+const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false)
 
     const toggle = () => setIsOpen(!isOpen)
 
+
   return (
-    <NavBarContainer {...props}>
+    <NavBarContainer>
         <Logo
         w="100px"
         />
