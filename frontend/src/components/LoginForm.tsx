@@ -11,6 +11,10 @@ import {
   Stack
 } from "@chakra-ui/react";
 
+type event = {
+  value: React.ChangeEvent<HTMLInputElement>
+}
+
 const LoginForm = () => {
 
     const [username, setUsername] = useState("");
@@ -23,13 +27,13 @@ const LoginForm = () => {
             <Box>
             <FormControl id="username">
             <FormLabel>Username</FormLabel>
-            <Input type="username" onChange={(e) => setUsername(e.value)} value={username}  />
+            <Input type="username" onChange={(e: React.ChangeEvent<HTMLInputElement> ) => setUsername(e.target.value)} value={username}  />
             </FormControl>
         </Box>
         <Box>
             <FormControl id="password">
             <FormLabel>Password</FormLabel>
-            <Input type="password" onChange={(e) => setPassword(e.value)} value={password} />
+            <Input type="password" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} value={password} />
             </FormControl>
         </Box>
         <Center w={'100%'}>

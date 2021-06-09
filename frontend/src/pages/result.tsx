@@ -1,15 +1,23 @@
 import React from "react";
-import ReactSpeedometer from "react-d3-speedometer";
+import ReactSpeedometer, { Props } from "react-d3-speedometer";
 import "./result.css";
 
-export default class ResultPage extends React.Component {
-  constructor(props) {
+interface ResultPageProps {
+}
+
+interface ResultPageState {
+  value: {
+    analysisValue: number
+  }
+}
+
+export default class ResultPage extends React.Component<ResultPageProps, ResultPageState> {
+  constructor(props: any) {
     super(props);
 
     this.state = {
         value: {
             analysisValue: 700,
-
         }
     };
   }
