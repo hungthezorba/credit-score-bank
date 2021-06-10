@@ -23,8 +23,13 @@ interface ResultPageState {
     typedOfCreditUsed: number
   },
   loading: {
-    speedometerLoading: boolean,
     analysisLoading: boolean
+  },
+  configData: {
+        minValue: number,
+        maxValue: number,
+        segmentNumber: number,
+        segmentColors: string[]
   }
 }
 
@@ -43,11 +48,22 @@ export default class ResultPage extends React.Component<ResultPageProps, ResultP
             typedOfCreditUsed: 11,
         },
         loading: {
-            speedometerLoading: false,
             analysisLoading: false
+        },
+        configData: {
+            minValue: 360,
+            maxValue: 850,
+            segmentNumber: 5,
+            segmentColors: ["#9fc54c", "#70b352", "#e9af4b", "#d25b30", "#a32330"]
         }
     };
   }
+    // Take the value and define its color
+    textColor(value: number): string {
+        const distance:number = (this.state.configData.maxValue - this.state.configData.minValue) / this.state.configData.segmentNumber;
+        const seg = Math.floor((value - this.state.configData.minValue) / distance);
+        return this.state.configData.segmentColors[seg];
+    }
 
   render() {
     return (
@@ -55,15 +71,24 @@ export default class ResultPage extends React.Component<ResultPageProps, ResultP
         {/* Score Section */}
         <div>
           <p className="header">CREDIT SCORE</p>
-          <Skeleton
-            width="500px"
-            margin="0 auto"
-            isLoaded={!this.state.loading.speedometerLoading}
-          >
             <div className="speedometer">
-              <Speedometer resultScore={this.state.value.analysisValue} />
+              <Speedometer 
+                minValue={this.state.configData.minValue}
+                maxValue={this.state.configData.maxValue}
+                segmentNumber={this.state.configData.segmentNumber}
+                segmentColors={this.state.configData.segmentColors}
+                resultScore={!this.state.loading.analysisLoading ? this.state.value.analysisValue : this.state.configData.minValue} 
+              />
             </div>
-          </Skeleton>
+            <div style={{margin: "0 auto", marginBottom: "10px", marginTop: "-10px"}}>
+                <Skeleton
+                width="75px"
+                margin="0 auto"
+                isLoaded={!this.state.loading.analysisLoading}
+                >
+                    <p className="result-score" style={{color: this.textColor(this.state.value.analysisValue)}}>{this.state.value.analysisValue}</p>
+                </Skeleton>
+            </div>
 
           <hr className="style-two" />
 

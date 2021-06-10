@@ -37,8 +37,8 @@ const NavigationStack:React.FC<NavigationStackProps> = ({isOpen}) => {
         direction={["column", "row", "row", "row"]}
         pt={[4, 4, 0, 0]}
       >
-        <NavigationItem to="/">Login</NavigationItem>
-        <NavigationItem to="/how">About us</NavigationItem>
+        <NavigationItem to="/login">Login</NavigationItem>
+        <NavigationItem to="/about-us">About us</NavigationItem>
       </Stack>
     </Box>
   );

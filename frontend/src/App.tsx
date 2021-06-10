@@ -3,6 +3,7 @@ import './App.css';
 import Navbar from './components/Navbar'
 import { ChakraProvider } from "@chakra-ui/react"
 import Login from './pages/Login';
+import FileUpload from './pages/FileUpload';
 import Result from './pages/Result';
 import {
   BrowserRouter as Router,
@@ -29,8 +30,18 @@ function App() {
         <Router>
           <Navbar/>
           <Switch>
+            {/* Default path */}
             <Route path="/" exact>
-              {/* <Login/> */}
+              <FileUpload />
+            </Route>
+            
+            {/* Default path */}
+            <Route path="/login">
+              <Login />
+            </Route>
+
+            {/* Result path */}
+            <Route path="/result">
               <Result />
             </Route>
           </Switch>

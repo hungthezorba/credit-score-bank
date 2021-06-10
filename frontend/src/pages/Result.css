@@ -30,7 +30,6 @@
     position: relative;
     margin: 0 auto;
     margin-top: 20px;
-    margin-bottom: 10px;
 };
 
 hr.style-two {
@@ -43,4 +42,10 @@ p.header {
     font-size: 30px;
     text-align: center;
     font-weight: bold
+}
+
+p.result-score {
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
 }

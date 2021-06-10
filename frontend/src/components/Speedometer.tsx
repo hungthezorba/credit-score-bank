@@ -1,12 +1,14 @@
-import React, {useState} from "react";
 import ReactSpeedometer from "react-d3-speedometer";
 
-const Speedometer = (props: any) => {
+const Speedometer = (
+  props: {
+    minValue: number,
+    maxValue: number,
+    segmentNumber: number,
+    segmentColors: string[],
+    resultScore: number
+  }) => {
     // Define basic config for the speedometer
-    const minValue = 360;
-    const maxValue = 850;
-    const segmentNumber = 5;
-    const segmentColors = ["#9fc54c", "#70b352", "#e9af4b", "#d25b30", "#a32330"];
     const segmentLabels: Array<object> = [
         {
         text: "Very Poor",
@@ -35,27 +37,19 @@ const Speedometer = (props: any) => {
         }
     ];
 
-    // Take the value and define its color
-    function textColor(value: number): string {
-        const distance = (maxValue - minValue) / segmentNumber;
-        const seg = Math.floor((value - minValue) / distance);
-        return segmentColors[seg];
-    }
-
     return (
       <>
         <ReactSpeedometer
           fluidWidth={true}
-          minValue={minValue}
-          maxValue={maxValue}
-          segments={segmentNumber}
+          minValue={props.minValue}
+          maxValue={props.maxValue}
+          segments={props.segmentNumber}
           value={props.resultScore}
           needleColor={"#434345"}
           needleHeightRatio={0.78}
+          currentValueText={""}
           customSegmentLabels={segmentLabels}
-          textColor={textColor(props.resultScore)}
-          valueTextFontSize={"20px"}
-          segmentColors={segmentColors}
+          segmentColors={props.segmentColors}
         />
       </>
     );
