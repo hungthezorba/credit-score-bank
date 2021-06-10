@@ -1,0 +1,51 @@
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+
+.speedometer {
+    width: 500px;
+    height: 300px;
+    background: #fff;
+    position: relative;
+    margin: 0 auto;
+    margin-top: 20px;
+};
+
+hr.style-two {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+p.header {
+    font-size: 30px;
+    text-align: center;
+    font-weight: bold
+}
+
+p.result-score {
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+}
