@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, createContext } from 'react'
 import './App.css';
 import Navbar from './components/Navbar'
 import { ChakraProvider } from "@chakra-ui/react"
@@ -9,27 +9,35 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import AppContext from './store/AppContext'
+import AppContext, { AppContextInterface } from './store/AppContext'
+import ExamplePage from './pages/ExamplePage';
+
 
 function App() {
 
   const [authenticated, setAuthenticated] = useState(false)
 
-  let state = {
+  let state: AppContextInterface = {
     authenticated,
-    setAuthenticated
+    setAuthenticated,
   }
 
-  
+
 
   return (
     <AppContext.Provider value={state}>
       <ChakraProvider>
         <Router>
-          <Navbar/>
+          <Navbar />
           <Switch>
             <Route path="/" exact>
-              <Login/>
+              <Login />
+            </Route>
+            <Route path="/home">
+              <ExamplePage />
+            </Route>
+            <Route path="/how">
+              <ExamplePage />
             </Route>
           </Switch>
         </Router>
