@@ -1,18 +1,30 @@
 
-import { Text, Link, Stack, Box } from "@chakra-ui/react";
+import { Text, Stack, Box, Link } from "@chakra-ui/react";
 import { useContext } from 'react'
-import AppContext from '../store/AppContext'
+import AppContext, { } from '../store/AppContext'
+import { Link as RouterLink } from 'react-router-dom'
 
 interface NavigationItemProps {
-  to: string
+  to: string,
+  children: string
 }
 
-const NavigationItem:React.FC<NavigationItemProps> = ({ children, to = "/", ...rest }) => {
+function NavigationItem({ children, to = '/', ...rest }: NavigationItemProps): JSX.Element {
+  const globalState = useContext(AppContext)
+
+  if (children == 'Logout') {
+    return (
+      <Link as={RouterLink} to={to}>
+        <Text onClick={() => globalState.setAuthenticated} display="block" {...rest}>
+          {children}
+        </Text>
+      </Link>
+    )
+  }
+
   return (
-    <Link href={to}>
-      <Text display="block" {...rest}>
-        {children}
-      </Text>
+    <Link as={RouterLink} to={to}>
+      {children}
     </Link>
   );
 };
@@ -21,15 +33,14 @@ interface NavigationStackProps {
   isOpen: boolean
 }
 
-const NavigationStack:React.FC<NavigationStackProps> = ({isOpen}) => {
+const NavigationStack: React.FC<NavigationStackProps> = ({ isOpen }) => {
 
-  const state = useContext(AppContext)
-
+  const globalState = useContext(AppContext)
 
   return (
     <Box
-    display={{ base: isOpen ? "block" : "none", md: "block" }}
-    flexBasis={{ base: "100%", md: "auto" }}>
+      display={{ base: isOpen ? "block" : "none", md: "block" }}
+      flexBasis={{ base: "100%", md: "auto" }}>
       <Stack
         spacing={8}
         align="center"
@@ -37,7 +48,12 @@ const NavigationStack:React.FC<NavigationStackProps> = ({isOpen}) => {
         direction={["column", "row", "row", "row"]}
         pt={[4, 4, 0, 0]}
       >
-        <NavigationItem to="/">Login</NavigationItem>
+        {globalState.authenticated ?
+          <NavigationItem to="/">Logout</NavigationItem>
+          :
+          <NavigationItem to="/">Login</NavigationItem>
+
+        }
         <NavigationItem to="/how">About us</NavigationItem>
       </Stack>
     </Box>

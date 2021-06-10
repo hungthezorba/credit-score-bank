@@ -1,14 +1,14 @@
 import { Center, Box } from '@chakra-ui/layout'
-import React from 'react'
+import React, { useContext } from 'react'
 import LoginForm from '../components/LoginForm'
 
-
 const Login = () => {
+
 
     return (
         <Box>
             <Center>
-                <LoginForm/>
+                <LoginForm />
             </Center>
         </Box>
     )
