@@ -16,8 +16,6 @@ function PrivateRoute({ component, path, children }: { component?: React.FC, pat
 
     const globalState = useContext(AppContext)
 
-    console.log(globalState.authenticated)
-
     return (
         <div>
             {globalState.authenticated ?

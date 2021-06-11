@@ -62,7 +62,7 @@ const LoginForm = () => {
   const history = useHistory();
 
   return (
-    <Box minW={['100%', '35%']} w={['100%', '35%']} px={12} py={40} borderRadius={20} boxShadow="base">
+    <Box minW={['100%', '35%']} w={['100%', '35%']} px={12} py={28} borderRadius={20} boxShadow="base">
       <Formik
         initialValues={initialValues}
         onSubmit={(values, actions) => {
@@ -81,22 +81,22 @@ const LoginForm = () => {
               {({ field, form }: { field: string, form: any }) => (
                 <FormControl isInvalid={form.errors.username && form.touched.username}>
                   <FormLabel htmlFor="username">Username</FormLabel>
-                  <Input {...field} id="username" placeholder="name" />
+                  <Input {...field} id="username" />
                   <FormErrorMessage>{form.errors.username}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
             <Field name="password" validate={validatePassword}>
               {({ field, form }: { field: string, form: any }) => (
-                <FormControl isInvalid={form.errors.password && form.touched.password}>
+                <FormControl mt={10} isInvalid={form.errors.password && form.touched.password}>
                   <FormLabel htmlFor="password">Password</FormLabel>
-                  <Input {...field} id="password" placeholder="password" />
+                  <Input {...field} id="password" />
                   <FormErrorMessage>{form.errors.password}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
             <Button
-              mt={4}
+              mt={10}
               w={['100%', '100%']}
               colorScheme="teal"
               isLoading={props.isSubmitting}
