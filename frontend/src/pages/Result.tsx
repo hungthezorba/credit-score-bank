@@ -26,44 +26,44 @@ interface ResultPageState {
     analysisLoading: boolean
   },
   configData: {
-        minValue: number,
-        maxValue: number,
-        segmentNumber: number,
-        segmentColors: string[]
+    minValue: number,
+    maxValue: number,
+    segmentNumber: number,
+    segmentColors: string[]
   }
 }
 
-export default class ResultPage extends React.Component<ResultPageProps, ResultPageState> {
+export default class Result extends React.Component<ResultPageProps, ResultPageState> {
   constructor(props: any) {
     super(props);
 
     // Mock data
     this.state = {
-        value: {
-            analysisValue: 811,
-            paymentHistory: 80,
-            amountOwed: 70,
-            creditHistoryLength: 64,
-            newCredit: 81,
-            typedOfCreditUsed: 11,
-        },
-        loading: {
-            analysisLoading: false
-        },
-        configData: {
-            minValue: 360,
-            maxValue: 850,
-            segmentNumber: 5,
-            segmentColors: ["#9fc54c", "#70b352", "#e9af4b", "#d25b30", "#a32330"]
-        }
+      value: {
+        analysisValue: 811,
+        paymentHistory: 80,
+        amountOwed: 70,
+        creditHistoryLength: 64,
+        newCredit: 81,
+        typedOfCreditUsed: 11,
+      },
+      loading: {
+        analysisLoading: false
+      },
+      configData: {
+        minValue: 360,
+        maxValue: 850,
+        segmentNumber: 5,
+        segmentColors: ["#9fc54c", "#70b352", "#e9af4b", "#d25b30", "#a32330"]
+      }
     };
   }
-    // Take the value and define its color
-    textColor(value: number): string {
-        const distance:number = (this.state.configData.maxValue - this.state.configData.minValue) / this.state.configData.segmentNumber;
-        const seg = Math.floor((value - this.state.configData.minValue) / distance);
-        return this.state.configData.segmentColors[seg];
-    }
+  // Take the value and define its color
+  textColor(value: number): string {
+    const distance: number = (this.state.configData.maxValue - this.state.configData.minValue) / this.state.configData.segmentNumber;
+    const seg = Math.floor((value - this.state.configData.minValue) / distance);
+    return this.state.configData.segmentColors[seg];
+  }
 
   render() {
     return (
@@ -71,24 +71,24 @@ export default class ResultPage extends React.Component<ResultPageProps, ResultP
         {/* Score Section */}
         <div>
           <p className="header">CREDIT SCORE</p>
-            <div className="speedometer">
-              <Speedometer 
-                minValue={this.state.configData.minValue}
-                maxValue={this.state.configData.maxValue}
-                segmentNumber={this.state.configData.segmentNumber}
-                segmentColors={this.state.configData.segmentColors}
-                resultScore={!this.state.loading.analysisLoading ? this.state.value.analysisValue : this.state.configData.minValue} 
-              />
-            </div>
-            <div style={{margin: "0 auto", marginBottom: "10px", marginTop: "-10px"}}>
-                <Skeleton
-                width="75px"
-                margin="0 auto"
-                isLoaded={!this.state.loading.analysisLoading}
-                >
-                    <p className="result-score" style={{color: this.textColor(this.state.value.analysisValue)}}>{this.state.value.analysisValue}</p>
-                </Skeleton>
-            </div>
+          <div className="speedometer">
+            <Speedometer
+              minValue={this.state.configData.minValue}
+              maxValue={this.state.configData.maxValue}
+              segmentNumber={this.state.configData.segmentNumber}
+              segmentColors={this.state.configData.segmentColors}
+              resultScore={!this.state.loading.analysisLoading ? this.state.value.analysisValue : this.state.configData.minValue}
+            />
+          </div>
+          <div style={{ margin: "0 auto", marginBottom: "10px", marginTop: "-10px" }}>
+            <Skeleton
+              width="75px"
+              margin="0 auto"
+              isLoaded={!this.state.loading.analysisLoading}
+            >
+              <p className="result-score" style={{ color: this.textColor(this.state.value.analysisValue) }}>{this.state.value.analysisValue}</p>
+            </Skeleton>
+          </div>
 
           <hr className="style-two" />
 

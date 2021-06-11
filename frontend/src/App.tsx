@@ -14,6 +14,7 @@ import AppContext, { AppContextInterface } from './store/AppContext'
 import PrivateRoute from './PrivateRoute';
 import Homepage from './pages/Homepage';
 import AboutUs from './pages/AboutUs';
+import Result from './pages/Result'
 
 
 function App() {
@@ -43,6 +44,9 @@ function App() {
             <Route path="/how">
               <AboutUs />
             </Route>
+            <PrivateRoute path="/result">
+              <Result />
+            </PrivateRoute>
           </Switch>
         </Router>
       </ChakraProvider>
