@@ -1,48 +1,47 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, createContext } from 'react'
 import './App.css';
 import Navbar from './components/Navbar'
 import { ChakraProvider } from "@chakra-ui/react"
 import Login from './pages/Login';
-import FileUpload from './pages/FileUpload';
-import Result from './pages/Result';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  Redirect
 } from "react-router-dom";
-import AppContext from './store/AppContext'
+import AppContext, { AppContextInterface } from './store/AppContext'
+import PrivateRoute from './PrivateRoute';
+import Homepage from './pages/Homepage';
+import AboutUs from './pages/AboutUs';
+
 
 function App() {
 
-  const [authenticated, setAuthenticated] = useState(false)
+  const [authenticated, setAuthenticated] = useState(localStorage.getItem('user') ? true : false)
 
-  let state = {
+  let state: AppContextInterface = {
     authenticated,
-    setAuthenticated
+    setAuthenticated,
   }
 
-  
+
 
   return (
     <AppContext.Provider value={state}>
       <ChakraProvider>
         <Router>
-          <Navbar/>
+          <Navbar />
           <Switch>
             {/* Default path */}
             <Route path="/" exact>
-              <FileUpload />
-            </Route>
-            
-            {/* Default path */}
-            <Route path="/login">
               <Login />
             </Route>
-
-            {/* Result path */}
-            <Route path="/result">
-              <Result />
+            <PrivateRoute path="/home" component={Homepage}>
+              <Homepage />
+            </PrivateRoute>
+            <Route path="/how">
+              <AboutUs />
             </Route>
           </Switch>
         </Router>
