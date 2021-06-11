@@ -33,6 +33,7 @@ function App() {
         <Router>
           <Navbar />
           <Switch>
+            {/* Default path */}
             <Route path="/" exact>
               <Login />
             </Route>
