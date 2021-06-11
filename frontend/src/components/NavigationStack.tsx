@@ -15,7 +15,10 @@ function NavigationItem({ children, to = '/', ...rest }: NavigationItemProps): J
   if (children == 'Logout') {
     return (
       <Link as={RouterLink} to={to}>
-        <Text onClick={() => globalState.setAuthenticated} display="block" {...rest}>
+        <Text onClick={() => {
+          globalState.setAuthenticated(false);
+          localStorage.removeItem('user');
+        }} display="block" {...rest}>
           {children}
         </Text>
       </Link>

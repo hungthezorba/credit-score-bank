@@ -7,15 +7,18 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  Redirect
 } from "react-router-dom";
 import AppContext, { AppContextInterface } from './store/AppContext'
-import ExamplePage from './pages/ExamplePage';
+import PrivateRoute from './PrivateRoute';
+import Homepage from './pages/Homepage';
+import AboutUs from './pages/AboutUs';
 
 
 function App() {
 
-  const [authenticated, setAuthenticated] = useState(false)
+  const [authenticated, setAuthenticated] = useState(localStorage.getItem('user') ? true : false)
 
   let state: AppContextInterface = {
     authenticated,
@@ -33,11 +36,11 @@ function App() {
             <Route path="/" exact>
               <Login />
             </Route>
-            <Route path="/home">
-              <ExamplePage />
-            </Route>
+            <PrivateRoute path="/home" component={Homepage}>
+              <Homepage />
+            </PrivateRoute>
             <Route path="/how">
-              <ExamplePage />
+              <AboutUs />
             </Route>
           </Switch>
         </Router>

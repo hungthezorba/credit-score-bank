@@ -69,6 +69,7 @@ const LoginForm = () => {
           setTimeout(() => {
             alert(JSON.stringify(values, null, 2))
             globalState.setAuthenticated(!globalState.authenticated)
+            localStorage.setItem('user', 'tokenabcdef')
             actions.setSubmitting(false)
             history.push('/home')
           }, 1000)

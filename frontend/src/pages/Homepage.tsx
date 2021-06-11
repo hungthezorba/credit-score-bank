@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 
-function ExamplePage() {
+function Homepage() {
 
     return (
         <div>
@@ -9,4 +9,4 @@ function ExamplePage() {
     )
 }
 
-export default ExamplePage;
+export default Homepage;
