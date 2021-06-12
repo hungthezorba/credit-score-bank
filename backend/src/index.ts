@@ -35,10 +35,12 @@ import { HelloResolver } from "./resolvers/hello";
 
 	// Initialize Express Server //
 	const app = express();
+	// inform Express in terms of Proxy (NGINX)
+	app.set("proxy", 1);
 	// Allow CORS from port 3000
 	app.use(
 		cors({
-			origin: "http://localhost:3000",
+			origin: process.env.CORS_ORIGIN,
 			credentials: true,
 		})
 	);
@@ -55,7 +57,7 @@ import { HelloResolver } from "./resolvers/hello";
 		cors: false,
 	});
 
-	const port = process.env.PORT || 4000;
+	const port = Number(process.env.PORT);
 	app.listen(port, () => {
 		console.log(`GraphQL-Express server is running on localhost:${port}`);
 	});
