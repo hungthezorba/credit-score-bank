@@ -1,7 +1,6 @@
 import React from "react";
 import { createClient, dedupExchange, cacheExchange, Provider } from "urql";
 import { multipartFetchExchange } from "@urql/exchange-multipart-fetch";
-import "./FileUpload.css";
 import UploadForm from '../components/UploadForm';
 
 interface ResultPageProps {
@@ -13,7 +12,7 @@ interface ResultPageState {
 }
 
 const client = createClient({
-  url: "http://localhost:3000",
+  url: "something", // The graphql query url
   exchanges: [dedupExchange, cacheExchange, multipartFetchExchange]
 });
 
@@ -29,10 +28,10 @@ constructor(props: any) {
     render() {
         return (
             <Provider value={client}>
-                <main className="container">
+                <main>
                     <UploadForm />
                 </main>
-                </Provider>
-        );
+            </Provider>
+        )
     }
 }

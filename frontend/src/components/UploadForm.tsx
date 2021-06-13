@@ -1,6 +1,7 @@
 import React from "react";
 import { useMutation } from "urql";
 import gql from "graphql-tag";
+import "./UploadForm.css";
 
 const uploadMutation = gql`
   mutation($file: Upload!) {
@@ -11,7 +12,7 @@ const uploadMutation = gql`
 `;
 
 const Upload = () => {
-  const [, mutate] = useMutation(uploadMutation);
+  const [data, mutate] = useMutation(uploadMutation);
   const handleChange = React.useCallback(
     ({
       target: {
@@ -21,7 +22,20 @@ const Upload = () => {
     }) => validity.valid && mutate({ file }),
     [mutate]
   );
-  return <input type="file" required onChange={handleChange} />;
-};
+
+  return(
+    <div className="form-container">
+        {console.log(data.fetching)}
+        <div className="form">
+            <input 
+                type="file" 
+                className="custom-file-input" 
+                onChange={handleChange}
+                required  
+            />
+        </div>
+    </div>
+  )
+}
 
 export default Upload;

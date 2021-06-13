@@ -22,8 +22,6 @@ function App() {
     setAuthenticated
   }
 
-  
-
   return (
     <AppContext.Provider value={state}>
       <ChakraProvider>
