@@ -1,5 +1,8 @@
 import React from "react";
+import { createClient, dedupExchange, cacheExchange, Provider } from "urql";
+import { multipartFetchExchange } from "@urql/exchange-multipart-fetch";
 import "./FileUpload.css";
+import UploadForm from '../components/UploadForm';
 
 interface ResultPageProps {
 
@@ -8,6 +11,11 @@ interface ResultPageProps {
 interface ResultPageState {
 
 }
+
+const client = createClient({
+  url: "http://localhost:3000",
+  exchanges: [dedupExchange, cacheExchange, multipartFetchExchange]
+});
 
 export default class FileUpload extends React.Component<ResultPageProps, ResultPageState> {
 constructor(props: any) {
@@ -20,10 +28,11 @@ constructor(props: any) {
 
     render() {
         return (
-            <div className="container">
-                <p className="header">File Upload</p>
-                <input></input>
-            </div>
+            <Provider value={client}>
+                <main className="container">
+                    <UploadForm />
+                </main>
+                </Provider>
         );
     }
 }
