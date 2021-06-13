@@ -44,6 +44,7 @@ function App() {
             <Route path="/result">
               <Result />
             </Route>
+            
           </Switch>
         </Router>
       </ChakraProvider>

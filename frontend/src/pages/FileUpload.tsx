@@ -20,8 +20,9 @@ constructor(props: any) {
 
     render() {
         return (
-            <div>
-                <p>Hello World!</p>
+            <div className="container">
+                <p className="header">File Upload</p>
+                <input></input>
             </div>
         );
     }
