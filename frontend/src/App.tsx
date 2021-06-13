@@ -15,6 +15,7 @@ import PrivateRoute from './PrivateRoute';
 import Homepage from './pages/Homepage';
 import AboutUs from './pages/AboutUs';
 import Result from './pages/Result'
+import FileUpload from './pages/FileUpload';
 
 
 function App() {
@@ -26,8 +27,6 @@ function App() {
     setAuthenticated,
   }
 
-
-
   return (
     <AppContext.Provider value={state}>
       <ChakraProvider>
@@ -36,13 +35,16 @@ function App() {
           <Switch>
             {/* Default path */}
             <Route path="/" exact>
-              <Login />
+              <FileUpload />
             </Route>
             <PrivateRoute path="/home" component={Homepage}>
               <Homepage />
             </PrivateRoute>
             <Route path="/how">
               <AboutUs />
+            </Route>
+            <Route path="/login">
+              <Login />
             </Route>
             <PrivateRoute path="/result">
               <Result />
