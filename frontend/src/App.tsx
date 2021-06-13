@@ -35,7 +35,7 @@ function App() {
           <Switch>
             {/* Default path */}
             <Route path="/" exact>
-              <FileUpload />
+              <Login />
             </Route>
             <PrivateRoute path="/home" component={Homepage}>
               <Homepage />
@@ -43,8 +43,8 @@ function App() {
             <Route path="/how">
               <AboutUs />
             </Route>
-            <Route path="/login">
-              <Login />
+            <Route path="/upload">
+              <FileUpload />
             </Route>
             <PrivateRoute path="/result">
               <Result />
