@@ -1,0 +1,12 @@
+#navigationBar {
+    padding: 0 10em;
+}
+
+#navigationBar div {
+    display: inline-block;
+}
+
+#navigationStack {
+    margin-left: 50em;
+    display: flex;
+}
