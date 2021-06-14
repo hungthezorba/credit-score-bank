@@ -12,7 +12,7 @@ const uploadMutation = gql`
 `;
 
 const Upload = () => {
-  const [data, mutate] = useMutation(uploadMutation);
+  const [, mutate] = useMutation(uploadMutation);
   const handleChange = React.useCallback(
     ({
       target: {
@@ -25,7 +25,6 @@ const Upload = () => {
 
   return(
     <div className="form-container">
-        {console.log(data.fetching)}
         <div className="form">
             <input 
                 type="file" 

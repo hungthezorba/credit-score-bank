@@ -1,4 +1,4 @@
-import React, { useState, useContext, createContext } from 'react'
+import { useState } from 'react'
 import './App.css';
 import Navbar from './components/Navbar'
 import { ChakraProvider } from "@chakra-ui/react"
@@ -6,17 +6,13 @@ import Login from './pages/Login';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link,
-  Redirect
+  Route
 } from "react-router-dom";
 import AppContext, { AppContextInterface } from './store/AppContext'
 import PrivateRoute from './PrivateRoute';
-import Homepage from './pages/Homepage';
 import AboutUs from './pages/AboutUs';
 import Result from './pages/Result'
 import FileUpload from './pages/FileUpload';
-
 
 function App() {
 
@@ -37,15 +33,13 @@ function App() {
             <Route path="/" exact>
               <Login />
             </Route>
-            <PrivateRoute path="/home" component={Homepage}>
-              <Homepage />
-            </PrivateRoute>
-            <Route path="/how">
+            <Route path="/about">
               <AboutUs />
             </Route>
-            <Route path="/upload">
+
+            <PrivateRoute path="/home" >
               <FileUpload />
-            </Route>
+            </PrivateRoute>
             <PrivateRoute path="/result">
               <Result />
             </PrivateRoute>

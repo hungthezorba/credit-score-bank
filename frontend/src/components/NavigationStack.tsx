@@ -1,4 +1,3 @@
-
 import { Text, Stack, Box, Link } from "@chakra-ui/react";
 import { useContext } from 'react'
 import AppContext, { } from '../store/AppContext'
@@ -57,7 +56,7 @@ const NavigationStack: React.FC<NavigationStackProps> = ({ isOpen }) => {
           <NavigationItem to="/">Login</NavigationItem>
 
         }
-        <NavigationItem to="/how">About us</NavigationItem>
+        <NavigationItem to="/about">About us</NavigationItem>
       </Stack>
     </Box>
   );
