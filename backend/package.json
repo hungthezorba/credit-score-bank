@@ -9,6 +9,7 @@
 		"@types/express-session": "^1.17.3",
 		"@types/graphql": "^14.5.0",
 		"@types/node": "^8.10.66",
+		"@types/validator": "^13.1.4",
 		"nodemon": "^2.0.7",
 		"ts-node": "3.3.0",
 		"tsconfig-paths": "^3.9.0",
@@ -24,11 +25,14 @@
 		"express": "^4.17.1",
 		"express-session": "^1.17.2",
 		"graphql": "^15.5.0",
+		"joi": "^17.4.0",
 		"pg": "^8.4.0",
 		"redis": "^3.1.2",
 		"reflect-metadata": "^0.1.10",
 		"type-graphql": "^1.1.1",
-		"typeorm": "0.2.34"
+		"typedi": "^0.10.0",
+		"typeorm": "0.2.34",
+		"typeorm-typedi-extensions": "^0.4.1"
 	},
 	"scripts": {
 		"build": "tsc",
