@@ -21,7 +21,6 @@ import '../assets/vendor/bootstrap/css/bootstrap.min.css';
 function AboutUs() {
 
     return (
-        <Box>
             <div className="AboutUs">
             <body className="body">
             
@@ -413,9 +412,7 @@ function AboutUs() {
                     <div className="copyright">
                         &copy; Copyright <strong><span>Arsha</span></strong>. All Rights Reserved
                     </div>
-                    <div className="credits">
-                        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-                    </div>
+                    
                     </div>
                 </footer>
                 {/* End Footer */}
@@ -423,7 +420,6 @@ function AboutUs() {
 
             </body>
         </div>
-        </Box>
     )
 }
 
