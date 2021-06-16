@@ -14,9 +14,16 @@ import hung from '../assets/img/hung.jpg';
 import thien  from '../assets/img/thien.jpg';
 import '../assets/css/style.css';
 import '../assets/vendor/bootstrap/css/bootstrap.css';
-// import '../assets/js/main.js';
-// import '../assets/vendor/aos/aos.css';
 import '../assets/vendor/bootstrap/css/bootstrap.min.css';
+import '../assets/js/main.js';
+// import '../assets/vendor/aos/aos.css';
+
+// import '../assets/js/main.js';
+// import '../assets/vendor/glightbox/js/glightbox.min.js';
+// import '../assets/vendor/isotope-layout/isotope.pkgd.min.js';
+// import '../assets/vendor/php-email-form/validate.js';
+// import '../assets/vendor/swiper/swiper-bundle.min.js';
+// import '../assets/vendor/waypoints/noframework.waypoints.js';
 
 function AboutUs() {
 
@@ -139,7 +146,7 @@ function AboutUs() {
                                 </div>
 
                                 <div className="col-lg-6 pt-4 pt-lg-0 content" data-aos="fade-left" data-aos-delay="100">
-                                    <h3>Voluptatem dignissimos provident quasi corporis voluptates</h3>
+                                    <h3>Technology</h3>
                                     <p className="fst-italic">
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
                                     magna aliqua.
@@ -209,7 +216,7 @@ function AboutUs() {
                                 <div className="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="200">
                                 <div className="pic"><img src={huy} className="img-fluid" alt=""/></div>
                                 <div className="member-info">
-                                    <h4>Huy Vu</h4>
+                                    <h4>Duy Vu</h4>
                                     <span>Business </span>
                                     <p>hm ..............</p>
                                 </div>

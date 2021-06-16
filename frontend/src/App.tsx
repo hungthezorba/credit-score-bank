@@ -13,6 +13,7 @@ import PrivateRoute from './PrivateRoute';
 import AboutUs from './pages/AboutUs';
 import Result from './pages/Result'
 import FileUpload from './pages/FileUpload';
+import History from './pages/History';
 
 function App() {
 
@@ -43,6 +44,12 @@ function App() {
             <PrivateRoute path="/result">
               <Result />
             </PrivateRoute>
+            {/* <PrivateRoute path="/history">
+              <History />
+            </PrivateRoute> */}
+            <Route path="/history">
+              <History />
+            </Route>
           </Switch>
         </Router>
       </ChakraProvider>
