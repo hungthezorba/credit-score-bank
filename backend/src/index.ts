@@ -15,7 +15,7 @@ import connectRedis from "connect-redis";
 import { COOKIE_NAME, __prod__ } from "./constants";
 import { UserResolver } from "./resolver/User.resolver";
 
-// *** MAIN Node.js APP *** //
+// *** MAIN Node.js Application *** //
 (async () => {
   // Declare reconnection attributes
   let maxReconnections = 20;
