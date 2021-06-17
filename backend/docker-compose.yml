@@ -2,12 +2,14 @@ version: "3.8"
 services:
   redis:
     image: redis
-    ports:
-      - 6379:6379
+    restart: unless-stopped
+    volumes:
+      - redisdata:/data
     networks:
       - servernet
   db:
     image: postgres
+    restart: unless-stopped
     volumes:
       - pgdata:/var/lib/postgresql/data
     networks:
@@ -18,13 +20,14 @@ services:
       POSTGRES_DB: credit-score
   server:
     image: bietdoikiem/credit-score-bank-backend:latest
+    restart: unless-stopped
     ports:
-      - 4001:4000
+      - 4000:4000
     networks:
       - servernet
     environment:
       POSTGRES_URL: postgresql://postgres:rmit@db:5432/credit-score
-      REDIS_URL: redis://redis:6379
+      REDIS_URL: redis://localhost:6379
       PORT: 4000
       SESSION_SECRET: secretkeyofquocminhproduction
       CORS_ORIGIN: http://localhost:3000
@@ -34,3 +37,4 @@ networks:
   servernet:
 volumes:
   pgdata:
+  redisdata:

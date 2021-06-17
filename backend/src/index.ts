@@ -98,6 +98,8 @@ import { UserResolver } from "./resolver/User.resolver";
       container: Container,
     }),
     context: ({ req, res }) => ({ em: connection.manager, req, res }),
+    playground: !__prod__,
+    introspection: !__prod__,
   });
   // Apply Express and Cors
   apolloServer.applyMiddleware({
