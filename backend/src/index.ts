@@ -54,7 +54,10 @@ import { UserResolver } from "./resolver/User.resolver";
 
   // Connect to Redis
   let RedisStore = connectRedis(session);
-  let redisClient = redis.createClient({ retry_strategy: retryStrategy });
+  let redisClient = redis.createClient({
+    retry_strategy: retryStrategy,
+    url: process.env.REDIS_URL,
+  });
   // redisClient.on("error", function (err) {
   //   console.log("Redis error:", err);
   // });
@@ -76,7 +79,6 @@ import { UserResolver } from "./resolver/User.resolver";
       store: new RedisStore({
         client: redisClient,
         disableTouch: true,
-        url: process.env.REDIS_URL as string,
       }),
       cookie: {
         maxAge: 1000 * 60 * 60 * 24 * 365.25 * 10, // 10 years
