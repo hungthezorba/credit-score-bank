@@ -20,7 +20,7 @@ import argon2 from "argon2";
 import { MyContext } from "../types";
 import { ApolloError, UserInputError } from "apollo-server-express";
 import Joi, { ValidationOptions } from "joi";
-import { DuplicatedError } from "../response/CustomError.response";
+import { DuplicatedError } from "../response/CustomErrors.response";
 import { COOKIE_NAME } from "../constants";
 
 // Define Joi validate option
@@ -33,6 +33,11 @@ const validateOptions: ValidationOptions = {
   },
   noDefaults: true,
 };
+// Joi Validation Schema
+const registerSchema = Joi.object({
+  username: Joi.string().min(3).max(30).required(),
+  password: Joi.string().min(3).required(),
+});
 
 @InputType()
 class UsernamePasswordInput {
@@ -80,23 +85,16 @@ export class UserResolver extends UserTemplateResolver {
     @Arg("options") options: UsernamePasswordInput,
     @Ctx() { req }: MyContext
   ): Promise<UserResponse> {
-    // Joi Validation Schema
-    const schema = Joi.object({
-      username: Joi.string().min(3).max(30).required(),
-      password: Joi.string().min(3).required(),
-    });
-
-    const { error } = schema.validate(options, validateOptions);
-    console.log(error);
+    // Validate user register input
+    const { error } = registerSchema.validate(options, validateOptions);
     if (error) {
       throw new UserInputError(
         "Validation Error: Failed to register a user due to validation errors",
         {
-          fieldErrors: error.details,
+          validationErrors: error.details,
         }
       );
     }
-
     // Register a user
     let hashedPassword = await argon2.hash(options.password);
     const savedUser = {
@@ -109,14 +107,17 @@ export class UserResolver extends UserTemplateResolver {
     } catch (error) {
       // Check duplicated username
       if (error.code === "23505") {
-        throw new DuplicatedError("Database Error: Failed to register a user", {
-          fieldErrors: [
-            {
-              message: "username has already been taken",
-              path: ["username"],
-            },
-          ],
-        });
+        throw new DuplicatedError(
+          "Validation Error: Failed to register a user due to validation errors",
+          {
+            validationErrors: [
+              {
+                message: "username has already been taken",
+                path: ["username"],
+              },
+            ],
+          }
+        );
       }
     }
     // Save user cookie upon successful register
@@ -133,6 +134,7 @@ export class UserResolver extends UserTemplateResolver {
     @Arg("options") options: UsernamePasswordInput,
     @Ctx() { req }: MyContext
   ): Promise<UserResponse> {
+    console.log(req.session);
     const user = await this.userRepository.findOne({
       username: options.username,
     });
@@ -141,9 +143,10 @@ export class UserResolver extends UserTemplateResolver {
       throw new UserInputError(
         "Validation Error: Failed to login due to validation errors",
         {
-          fieldErrors: [
+          validationErrors: [
             {
               message: "username does not exist",
+              path: ["username"],
             },
           ],
         }
@@ -155,9 +158,10 @@ export class UserResolver extends UserTemplateResolver {
       throw new UserInputError(
         "Validation Error: Failed to login due to validation errors",
         {
-          fieldErrors: [
+          validationErrors: [
             {
               message: "password does not match",
+              path: ["password"],
             },
           ],
         }
@@ -183,5 +187,17 @@ export class UserResolver extends UserTemplateResolver {
         resolve(true);
       })
     );
+  }
+
+  // **Delete a User function**//
+  @Mutation(() => Boolean)
+  async deleteUser(@Arg("id") id: number): Promise<Boolean> {
+    const user = await this.userRepository.findOne(id);
+    if (!user) {
+      return false;
+    }
+    await this.userRepository.delete(id);
+    console.log("False");
+    return true;
   }
 }

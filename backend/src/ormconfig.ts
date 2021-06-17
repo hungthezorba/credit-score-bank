@@ -1,12 +1,11 @@
 import { ConnectionOptions } from "typeorm";
 import path from "path";
 import { __prod__ } from "./constants";
-import Dotenv from "dotenv";
-Dotenv.config();
+import "dotenv-safe/config";
 
 const config: ConnectionOptions = {
   type: "postgres",
-  url: process.env.POSTGRES_URL,
+  url: process.env.POSTGRES_URL as string,
   synchronize: false,
   logging: !__prod__,
   entities: [path.join(__dirname, "./entity/*")],

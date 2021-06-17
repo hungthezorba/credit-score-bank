@@ -1,6 +1,7 @@
-import { Entity, Column } from "typeorm";
+import { Entity, Column, OneToMany } from "typeorm";
 import { ObjectType, Field } from "type-graphql";
 import { TemplateEntity } from "./Template.entity";
+import { CreditHistory } from "./CreditHistory.entity";
 
 @ObjectType()
 @Entity()
@@ -17,7 +18,8 @@ export class Customer extends TemplateEntity {
   @Column({ type: "date", nullable: true })
   dateOfBirth: Date;
 
-  @Field()
-  @Column({ type: "float", nullable: true })
-  creditScore: number;
+  @OneToMany(() => CreditHistory, (creditHistory) => creditHistory.customer)
+  creditHistoryList: CreditHistory[];
+
+  // createdAt, updatedAt ...
 }
