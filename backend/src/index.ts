@@ -9,7 +9,7 @@ import "dotenv-safe/config";
 import cors from "cors";
 import config from "./ormconfig";
 import { HelloResolver } from "./resolver/Hello.resolver";
-import redis from "redis";
+import redis, { RetryStrategyOptions } from "redis";
 import session from "express-session";
 import connectRedis from "connect-redis";
 import { COOKIE_NAME, __prod__ } from "./constants";
@@ -30,7 +30,9 @@ import { UserResolver } from "./resolver/User.resolver";
       connection = await createConnection(config);
       connected = true;
     } catch (error) {
-      console.log("Reconnecting in 5 seconds...");
+      console.error(
+        `PostgreSQL service (${process.env.DATABASE_URL}) refused the connection. Retrying connection...`
+      );
       await sleep(5000);
       maxReconnections -= 1;
     }
@@ -52,10 +54,10 @@ import { UserResolver } from "./resolver/User.resolver";
 
   // Connect to Redis
   let RedisStore = connectRedis(session);
-  let redisClient = redis.createClient();
-  redisClient.on("error", function (err) {
-    console.log("Redis error:", err);
-  });
+  let redisClient = redis.createClient({ retry_strategy: retryStrategy });
+  // redisClient.on("error", function (err) {
+  //   console.log("Redis error:", err);
+  // });
 
   // Inform Express in terms of Proxy (NGINX)
   app.set("trust proxy", 1);
@@ -114,4 +116,28 @@ import { UserResolver } from "./resolver/User.resolver";
 
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function retryStrategy(options: RetryStrategyOptions) {
+  if (
+    options.error &&
+    (options.error.code === "ECONNREFUSED" ||
+      options.error.code === "NR_CLOSED")
+  ) {
+    // Try reconnecting after 5 seconds
+    console.error(
+      `Redis service (${process.env.REDIS_URL}) refused the connection. Retrying connection...`
+    );
+    return 5000;
+  }
+  if (options.total_retry_time > 1000 * 60 * 60) {
+    // End reconnecting after a specific timeout and flush all commands with an individual error
+    return new Error("Retry time exhausted");
+  }
+  if (options.attempt > 50) {
+    // End reconnecting with built in error
+    return undefined;
+  }
+  // reconnect after
+  return Math.min(options.attempt * 100, 3000);
 }

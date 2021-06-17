@@ -23,7 +23,7 @@ RUN npm install argon2
 
 #Bundle app source
 COPY . .
-COPY .env .
+COPY .env.production .env
 
 RUN npm run build
 
