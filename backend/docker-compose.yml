@@ -3,8 +3,6 @@ services:
   redis:
     image: redis
     restart: unless-stopped
-    volumes:
-      - redisdata:/data
     networks:
       - servernet
   db:
@@ -37,4 +35,3 @@ networks:
   servernet:
 volumes:
   pgdata:
-  redisdata:
