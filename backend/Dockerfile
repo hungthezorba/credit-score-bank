@@ -1,7 +1,7 @@
 FROM node:14
 
 # Create app directory
-WORKDIR /backend
+WORKDIR /usr/src/app
 
 # Install App Dependencies
 COPY package.json ./
