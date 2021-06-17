@@ -44,12 +44,9 @@ function App() {
             <PrivateRoute path="/result">
               <Result />
             </PrivateRoute>
-            {/* <PrivateRoute path="/history">
+            <PrivateRoute path="/history">
               <History />
-            </PrivateRoute> */}
-            <Route path="/history">
-              <History />
-            </Route>
+            </PrivateRoute>
           </Switch>
         </Router>
       </ChakraProvider>
