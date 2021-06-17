@@ -4,7 +4,9 @@ FROM node:14
 WORKDIR /backend
 
 # Install App Dependencies
-COPY package*.json ./
+COPY package.json ./
+COPY package-lock.json ./
+
 
 RUN npm install
 
@@ -18,5 +20,5 @@ RUN npm run build
 ENV NODE_ENV production
 
 EXPOSE 4000
-CMD ["node", "dist/index.js"]
+CMD ["node", "build/index.js"]
 USER node

@@ -16,14 +16,18 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_DB: credit-score
   server:
-    image: bietdoikiem/credit-score-bank-backend
+    image: bietdoikiem/credit-score-bank-backend:latest
     ports:
       - 4001:4000
     networks:
       - servernet
     environment:
-      POSTGRES_URL: postgresql://postgres:rmit@localhost:5432/credit-score
-      REDIS_URL: 127.0.0.1:6379
+      POSTGRES_URL: postgresql://postgres:rmit@db:5432/credit-score
+      REDIS_URL: redis:6379
       PORT: 4000
       SESSION_SECRET: secretkeyofquocminhproduction
       CORS_ORIGIN: http://localhost:3000
+networks:
+  servernet:
+volumes:
+  pgdata:
