@@ -1804,3 +1804,7 @@ section {
     padding-top: 4px;
   }
 }
+
+.rotate{
+  transform: rotate(180deg);
+}

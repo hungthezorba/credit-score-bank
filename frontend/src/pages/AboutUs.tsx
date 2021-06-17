@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/layout'
-import React from 'react'
 import {Input, Flex, Heading} from '@chakra-ui/react';
-import {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
+import { MDBCollapse, MDBBtn, MDBRow, MDBCol } from 'mdb-react-ui-kit';
 import hero from '../assets/img/hero-img.png';
 import whyus from '../assets/img/why-us.png';
 import skills from '../assets/img/skills.png';
@@ -16,9 +16,11 @@ import '../assets/css/style.css';
 import '../assets/vendor/bootstrap/css/bootstrap.css';
 import '../assets/vendor/bootstrap/css/bootstrap.min.css';
 import '../assets/js/main.js';
+import '../assets/vendor/bootstrap-icons/bootstrap-icons.css';
+import '../assets/vendor/boxicons/css/boxicons.min.css';
 // import '../assets/vendor/aos/aos.css';
 
-// import '../assets/js/main.js';
+// import '../assets/vendor/bootstrap/js/bootstrap.bundle.min.js';
 // import '../assets/vendor/glightbox/js/glightbox.min.js';
 // import '../assets/vendor/isotope-layout/isotope.pkgd.min.js';
 // import '../assets/vendor/php-email-form/validate.js';
@@ -26,6 +28,36 @@ import '../assets/js/main.js';
 // import '../assets/vendor/waypoints/noframework.waypoints.js';
 
 function AboutUs() {
+    
+    const [showFirstElement, setShowFirstElement] = useState(false);
+    const [showSecondElement, setShowSecondElement] = useState(false);
+    const [showThirdElement, setShowThirdElement] = useState(false);
+    const [setActive1, setActiveState1 ] = useState("");
+    const [rotate1, setRotate1 ] = useState("arrow-icon");
+    const [setActive2, setActiveState2 ] = useState("");
+    const [rotate2, setRotate2 ] = useState("arrow-icon");
+    const [setActive3, setActiveState3 ] = useState("");
+    const [rotate3, setRotate3 ] = useState("arrow-icon");
+
+    const toggleFirstElement = () => {
+        setShowFirstElement(!showFirstElement);
+        setActiveState1(setActive1 === "" ? "active1" : "");
+        setRotate1(setActive1 === "active1" ? "arrow-icon" : "arrow-icon rotate");
+    }
+    const toggleSecondElement = () => {
+        setShowSecondElement(!showSecondElement);
+        setActiveState2(setActive2 === "" ? "active2" : "");
+        setRotate2(setActive2 === "active2" ? "arrow-icon" : "arrow-icon rotate");
+    }
+    const toggleThirdElement = () => {
+        setShowThirdElement(!showThirdElement);
+        setActiveState3(setActive3 === "" ? "active3" : "");
+        setRotate3(setActive3 === "active3" ? "arrow-icon" : "arrow-icon rotate");
+    }
+
+    // if (showFirstElement){
+    //     return <i className="bx bx-chevron-down icon-show"></i>
+    // } else return <i className="bx bx-chevron-up icon-close"></i>
 
     return (
             <div className="AboutUs">
@@ -36,7 +68,7 @@ function AboutUs() {
                         <div className="row">
                             <div className="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
                                 <h1>Credit Score</h1>
-                                <h2>Making financial loan process faster and simpler </h2>
+                                <h2>FREE and easy way to check your credit score.</h2>
                             </div>
                             <div className="col-lg-6 order-1 order-lg-2 hero-img" >
                                 <img src={hero} className="img-fluid animated" alt="" />
@@ -56,21 +88,19 @@ function AboutUs() {
 
                         <div className="row content">
                         <div className="col-lg-6">
-                            <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                            magna aliqua.
+                            <p>Our website is a free and fast way for checking credit score. And we'll point out what are the factors that affect your score. About security and privacy:
                             </p>
+                            <br />
                             <ul>
-                            <li><i className="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
-                            <li><i className="ri-check-double-line"></i> Duis aute irure dolor in reprehenderit in voluptate velit</li>
-                            <li><i className="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
+                            <li><i className="ri-check-double-line"></i>+ We'll notify you if your SSN is found on other websites.</li>
+                            <li><i className="ri-check-double-line"></i>+ Our customer infomation is never sold to third parties.</li>
+                            <li><i className="ri-check-double-line"></i>+ 128-bit encryption for data protection.</li>
                             </ul>
                         </div>
                         <div className="col-lg-6 pt-4 pt-lg-0">
                             <p>
-                            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                            culpa qui officia deserunt mollit anim id est laborum.
+                            Lenders use credit scores to decide how likely it is you will repay your debts on time. Consequently, knowing what is your credit scores and what affects them can help you when you're getting ready to apply for new credit.
+                            
                             </p>
                             <a href="#" className="btn-learn-more">Learn More</a>
                         </div>
@@ -89,38 +119,36 @@ function AboutUs() {
                         <div className="col-lg-7 d-flex flex-column justify-content-center align-items-stretch  order-2 order-lg-1">
 
                             <div className="content">
-                            <h3>Eum ipsam laborum deleniti <strong>velit pariatur architecto aut nihil</strong></h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
-                            </p>
+                            <h3><strong>Frequently asked questions.</strong></h3>
+                            <br />
                             </div>
 
                             <div className="accordion-list">
                             <ul>
                                 <li>
-                                <a data-bs-toggle="collapse" className="collapse" data-bs-target="#accordion-list-1"><span>01</span> Non consectetur a erat nam at lectus urna duis? <i className="bx bx-chevron-down icon-show"></i><i className="bx bx-chevron-up icon-close"></i></a>
+                                <a onClick={toggleFirstElement} className={`first ques ${setActive1}`} ><span >01</span> What affect your credit score ?<i className={`bx bx-chevron-down icon-close ${rotate1}`}></i></a>
                                 <div id="accordion-list-1" className="collapse show" data-bs-parent=".accordion-list">
-                                    <p>
-                                    Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
-                                    </p>
+                                    <MDBCollapse show={showFirstElement}>
+                                        There are serveral common factors that affect your credit score which are payment history, credit usage, length of credit history, recent activity and types of account.
+                                    </MDBCollapse>
                                 </div>
                                 </li>
 
                                 <li>
-                                <a data-bs-toggle="collapse" data-bs-target="#accordion-list-2" className="collapsed"><span>02</span> Feugiat scelerisque varius morbi enim nunc? <i className="bx bx-chevron-down icon-show"></i><i className="bx bx-chevron-up icon-close"></i></a>
+                                <a onClick={toggleSecondElement} className={`second ques ${setActive2}`} ><span>02</span> Why you need a good creadit score ? <i className={`bx bx-chevron-down icon-close ${rotate2}`}></i></a>
                                 <div id="accordion-list-2" className="collapse show" data-bs-parent=".accordion-list">
-                                    <p>
-                                    Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
-                                    </p>
+                                    <MDBCollapse show={showSecondElement}>
+                                    In general, having good credit can make achieving your financial and personal goals easier. It could be the difference between qualifying or being denied for an important loan. Therefore, credit scores are a tool that lenders use to make lending decisions.
+                                    </MDBCollapse>
                                 </div>
                                 </li>
 
                                 <li>
-                                <a data-bs-toggle="collapse" data-bs-target="#accordion-list-3" className="collapsed"><span>03</span> Dolor sit amet consectetur adipiscing elit? <i className="bx bx-chevron-down icon-show"></i><i className="bx bx-chevron-up icon-close"></i></a>
+                                <a onClick={toggleThirdElement} className={`third ques ${setActive3}`} ><span>03</span> How to improve your credit score ? <i className={`bx bx-chevron-down icon-close ${rotate3}`}></i></a>
                                 <div id="accordion-list-3" className="collapse show" data-bs-parent=".accordion-list">
-                                    <p>
-                                    Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
-                                    </p>
+                                    <MDBCollapse show={showThirdElement}>
+                                    To improve your credit scores, focus on the underlying factors that affect your scores. At a high level, the basic steps you need to take are fairly straightforward. Specifically, make at least your minimum payment and make all debt payments on time, since even a single late payment can hurt your credit scores and it'll stay on your credit report for up to seven years.
+                                    </MDBCollapse>
                                 </div>
                                 </li>
 
@@ -292,7 +320,6 @@ function AboutUs() {
 
                     <div className="section-title">
                     <h2>Contact</h2>
-                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
                     </div>
 
                     <div className="row">
@@ -302,7 +329,7 @@ function AboutUs() {
                         <div className="address">
                             <i className="bi bi-geo-alt"></i>
                             <h4>Location:</h4>
-                            <p>A108 Adam Street, New York, NY 535022</p>
+                            <p>702 Nguyen Van Linh Street, Ho Chi Minh city, Viet Nam.</p>
                         </div>
 
                         <div className="email">
@@ -314,7 +341,7 @@ function AboutUs() {
                         <div className="phone">
                             <i className="bi bi-phone"></i>
                             <h4>Call:</h4>
-                            <p>+1 5589 55488 55s</p>
+                            <p>+84 935353535</p>
                         </div>
 
                         </div>
@@ -367,12 +394,12 @@ function AboutUs() {
                         <div className="row">
 
                         <div className="col-lg-3 col-md-6 footer-contact">
-                            <h3>Arsha</h3>
+                            <h3>RMIT</h3>
                             <p>
-                            A108 Adam Street <br/>
-                            New York, NY 535022<br/>
-                            United States <br/><br/>
-                            <strong>Phone:</strong> +1 5589 55488 55<br/>
+                            702 Nguyen Van Linh Street <br/>
+                            Ho Chi Minh city,<br/>
+                            Viet Nam. <br/><br/>
+                            <strong>Phone:</strong> +84 935353535<br/>
                             <strong>Email:</strong> info@example.com<br/>
                             </p>
                         </div>
@@ -391,17 +418,16 @@ function AboutUs() {
                         <div className="col-lg-3 col-md-6 footer-links">
                             <h4>Our Services</h4>
                             <ul>
-                            <li><i className="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
+                            <li><i className="bx bx-chevron-right"></i> <a href="#">Mobile Development</a></li>
                             <li><i className="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-                            <li><i className="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-                            <li><i className="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-                            <li><i className="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+                            <li><i className="bx bx-chevron-right"></i> <a href="#">Data Analytics</a></li>
+                            <li><i className="bx bx-chevron-right"></i> <a href="#">Machine Learning</a></li>
+                            <li><i className="bx bx-chevron-right"></i> <a href="#">Cloud & Security</a></li>
                             </ul>
                         </div>
 
                         <div className="col-lg-3 col-md-6 footer-links">
                             <h4>Our Social Networks</h4>
-                            <p>Cras fermentum odio eu feugiat lide par naso tierra videa magna derita valies</p>
                             <div className="social-links mt-3">
                             <a href="#" className="twitter"><i className="bx bxl-twitter"></i></a>
                             <a href="#" className="facebook"><i className="bx bxl-facebook"></i></a>

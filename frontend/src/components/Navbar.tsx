@@ -8,6 +8,8 @@ import AppContext from '../store/AppContext'
 const NavBarContainer:React.FC = ({children}) => {
     return (
       <Flex
+        // id="header"
+        className="fixed-top"
         as="nav"
         align="center"
         justify="space-between"

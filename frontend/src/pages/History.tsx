@@ -20,21 +20,22 @@ const History = () => {
 
 
     return (
-        //<div className="History">
+        <>
+        <br /><br /><br /><br />
+        <div className="History">
         <body className="body">
             <div id="content" >
-                <Heading style={{color:"#3445b4", marginLeft: "20px"}} mb={5}>History</Heading>
+                <Heading style={{color:"#3445b4", marginLeft: "20px"}} mb={6}>History</Heading>
             </div>	
             
             {/* <FilterTable /> */}
             <GlobalFilter />
             
         </body>
-        //</div>
-        
+        </div>
+        </>
         
         
     );
-}
- 
+        }
 export default History;
