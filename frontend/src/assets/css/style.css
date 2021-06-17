@@ -815,10 +815,43 @@ section {
   height: 10px;
 }
 
-.skills .progress-bar {
+.skills .progress-bar1 {
   width: 1px;
   height: 10px;
   transition: .9s;
+  width: 35%;
+  background-color: #4668a2;
+}
+
+.skills .progress-bar2 {
+  width: 1px;
+  height: 10px;
+  transition: .9s;
+  width: 30%;
+  background-color: #4668a2;
+}
+
+.skills .progress-bar3 {
+  width: 1px;
+  height: 10px;
+  transition: .9s;
+  width: 15%;
+  background-color: #4668a2;
+}
+
+.skills .progress-bar4 {
+  width: 1px;
+  height: 10px;
+  transition: .9s;
+  width: 10%;
+  background-color: #4668a2;
+}
+
+.skills .progress-bar5 {
+  width: 1px;
+  height: 10px;
+  transition: .9s;
+  width: 10%;
   background-color: #4668a2;
 }
 

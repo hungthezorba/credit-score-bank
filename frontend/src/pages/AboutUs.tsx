@@ -176,37 +176,43 @@ function AboutUs() {
                                 <div className="col-lg-6 pt-4 pt-lg-0 content" data-aos="fade-left" data-aos-delay="100">
                                     <h3>Technology</h3>
                                     <p className="fst-italic">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                                    magna aliqua.
+                                    Our model based on 5 main factors that affect customer's credit score. From that point, we ensure that our result get the highest accuracy.
                                     </p>
 
                                     <div className="skills-content">
 
                                     <div className="progress">
-                                        <span className="skill">HTML <i className="val">100%</i></span>
+                                        <span className="skill">Payment History <i className="val">35%</i></span>
                                         <div className="progress-bar-wrap">
-                                        <div className="progress-bar" role="progressbar" aria-valuenow={100} aria-valuemin={0} aria-valuemax={100}></div>
+                                        <div className="progress-bar1" role="progressbar" ></div>
                                         </div>
                                     </div>
 
                                     <div className="progress">
-                                        <span className="skill">CSS <i className="val">90%</i></span>
+                                        <span className="skill">Amount Owned <i className="val">30%</i></span>
                                         <div className="progress-bar-wrap">
-                                        <div className="progress-bar" role="progressbar" aria-valuenow={90} aria-valuemin={0} aria-valuemax={100}></div>
+                                        <div className="progress-bar2" role="progressbar" ></div>
                                         </div>
                                     </div>
 
                                     <div className="progress">
-                                        <span className="skill">JavaScript <i className="val">75%</i></span>
+                                        <span className="skill">Credit History <i className="val">15%</i></span>
                                         <div className="progress-bar-wrap">
-                                        <div className="progress-bar" role="progressbar" aria-valuenow={75} aria-valuemin={0} aria-valuemax={100}></div>
+                                        <div className="progress-bar3" role="progressbar"></div>
                                         </div>
                                     </div>
 
                                     <div className="progress">
-                                        <span className="skill">Photoshop <i className="val">55%</i></span>
+                                        <span className="skill">Credit Mix <i className="val">10%</i></span>
                                         <div className="progress-bar-wrap">
-                                        <div className="progress-bar" role="progressbar" aria-valuenow={55} aria-valuemin={0} aria-valuemax={100}></div>
+                                        <div className="progress-bar4" role="progressbar" ></div>
+                                        </div>
+                                    </div>
+
+                                    <div className="progress">
+                                        <span className="skill">New Credit <i className="val">15%</i></span>
+                                        <div className="progress-bar-wrap">
+                                        <div className="progress-bar5" role="progressbar"></div>
                                         </div>
                                     </div>
                                     </div>
