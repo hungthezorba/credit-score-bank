@@ -15,17 +15,9 @@ import thien  from '../assets/img/thien.jpg';
 import '../assets/css/style.css';
 import '../assets/vendor/bootstrap/css/bootstrap.css';
 import '../assets/vendor/bootstrap/css/bootstrap.min.css';
-import '../assets/js/main.js';
 import '../assets/vendor/bootstrap-icons/bootstrap-icons.css';
 import '../assets/vendor/boxicons/css/boxicons.min.css';
-// import '../assets/vendor/aos/aos.css';
 
-// import '../assets/vendor/bootstrap/js/bootstrap.bundle.min.js';
-// import '../assets/vendor/glightbox/js/glightbox.min.js';
-// import '../assets/vendor/isotope-layout/isotope.pkgd.min.js';
-// import '../assets/vendor/php-email-form/validate.js';
-// import '../assets/vendor/swiper/swiper-bundle.min.js';
-// import '../assets/vendor/waypoints/noframework.waypoints.js';
 
 function AboutUs() {
     
@@ -210,7 +202,7 @@ function AboutUs() {
                                     </div>
 
                                     <div className="progress">
-                                        <span className="skill">New Credit <i className="val">15%</i></span>
+                                        <span className="skill">New Credit <i className="val">10%</i></span>
                                         <div className="progress-bar-wrap">
                                         <div className="progress-bar5" role="progressbar"></div>
                                         </div>
