@@ -425,7 +425,7 @@ function AboutUs() {
                         </div>
 
                         <div className="col-lg-3 col-md-6 footer-links">
-                            <h4>Our Social Networks</h4>
+                            <h4 style={{color:"white"}}>Our Social Networks</h4>
                             <div className="social-links mt-3">
                             <a href="#" className="twitter"><i className="bx bxl-twitter"></i></a>
                             <a href="#" className="facebook"><i className="bx bxl-facebook"></i></a>
@@ -439,12 +439,7 @@ function AboutUs() {
                     </div>
                     </div>
 
-                    <div className="container footer-bottom clearfix">
-                    <div className="copyright">
-                        &copy; Copyright <strong><span>Arsha</span></strong>. All Rights Reserved
-                    </div>
-                    
-                    </div>
+
                 </footer>
                 {/* End Footer */}
                 
