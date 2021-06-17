@@ -81,7 +81,7 @@ const GlobalFilter: React.FC = () => {
          <>
         <Flex alignItems="flex-end" justifyContent="flex-end">
                         
-        <Flex style={{marginRight:"20px"}} >
+        <Flex style={{marginRight:"40px"}} >
             <Input value={filter || ''} onChange={filterRequire} placeholder="Search name ..."  type="text" mb={3}></Input>
             <i className="fas fa-search" style={{fontSize: "35px" , marginLeft:"10px"}}></i>
         </Flex>
