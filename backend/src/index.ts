@@ -53,6 +53,9 @@ import { UserResolver } from "./resolver/User.resolver";
   // Connect to Redis
   let RedisStore = connectRedis(session);
   let redisClient = redis.createClient();
+  redisClient.on("error", function (err) {
+    console.log("Redis error:", err);
+  });
 
   // Inform Express in terms of Proxy (NGINX)
   app.set("trust proxy", 1);

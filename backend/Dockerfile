@@ -1,4 +1,5 @@
-FROM node:14
+FROM node:14-alpine
+
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -7,12 +8,22 @@ WORKDIR /usr/src/app
 COPY package.json ./
 COPY package-lock.json ./
 
+# --no-cache: download package index on-the-fly, no need to cleanup afterwards
+# --virtual: bundle packages, remove whole bundle at once, when done
+RUN apk --no-cache --virtual build-dependencies add \
+    python \
+    make \
+    g++ \
+    && npm install \
+    && apk del build-dependencies
+RUN npm install -g node-gyp
+RUN npm install argon2
 
-RUN npm install
+
 
 #Bundle app source
 COPY . .
-COPY .env.production .env
+COPY .env .
 
 RUN npm run build
 
