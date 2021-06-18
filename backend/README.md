@@ -37,4 +37,4 @@ Since there are multiple services communicated with each other, we'll utilize Do
 
 **For Production**
 
-1. Run `docker-compose -f docker-compose.dev.yml` to start production environment (bundling, minified production resources) for all services -> Disable GraphQL playground at port 4000
+1. Run `docker-compose up` to start production environment (bundling, minified production resources) for all services -> Disable GraphQL playground at port 4000
