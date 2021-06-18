@@ -52,10 +52,10 @@ Since there are multiple services communicated with each other, we'll utilize Do
 <br/>
 <p align="center"><img width="1280" height="720" src="https://i.imgur.com/eefj08e.png"/></p>
 <p align="center"><i>GraphQL Playground</I></p>
-
+<p align="center"><i>Development ONLY (http://localhost:4000/graphql)</I></p>
 <br/>
 
-**Notation**
+**Notation & Instruction**
 
 - <b><span style="color: white">White: </span></b> GraphQL operations (queries/mutations) in an interactive playground with actual responses & requests
 
