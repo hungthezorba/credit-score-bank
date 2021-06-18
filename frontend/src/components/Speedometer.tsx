@@ -11,11 +11,6 @@ const Speedometer = (
     // Define basic config for the speedometer
     const segmentLabels: Array<object> = [
         {
-        text: "Very Poor",
-        position: "OUTSIDE",
-        color: "#555"
-        },
-        {
         text: "Poor",
         position: "OUTSIDE",
         color: "#555"
@@ -27,11 +22,6 @@ const Speedometer = (
         },
         {
         text: "Good",
-        position: "OUTSIDE",
-        color: "#555"
-        },
-        {
-        text: "Excellent",
         position: "OUTSIDE",
         color: "#555"
         }
