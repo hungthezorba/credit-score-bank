@@ -40,7 +40,7 @@ export default class Result extends React.Component<ResultPageProps, ResultPageS
     // Mock data
     this.state = {
       value: {
-        analysisValue: 811,
+        analysisValue: 89,
         paymentHistory: 80,
         amountOwed: 70,
         creditHistoryLength: 64,
@@ -51,10 +51,10 @@ export default class Result extends React.Component<ResultPageProps, ResultPageS
         analysisLoading: false
       },
       configData: {
-        minValue: 360,
-        maxValue: 850,
-        segmentNumber: 5,
-        segmentColors: ["#9fc54c", "#70b352", "#e9af4b", "#d25b30", "#a32330"]
+        minValue: 0,
+        maxValue: 99,
+        segmentNumber: 3,
+        segmentColors: ["#a32330", "#e9af4b", "#9fc54c"]
       }
     };
   }
@@ -69,7 +69,7 @@ export default class Result extends React.Component<ResultPageProps, ResultPageS
     return (
       <div className="container">
         {/* Score Section */}
-        <div>
+        <div style={{marginTop: 120}}>
           <p className="header">CREDIT SCORE</p>
           <div className="speedometer">
             <Speedometer
@@ -80,7 +80,7 @@ export default class Result extends React.Component<ResultPageProps, ResultPageS
               resultScore={!this.state.loading.analysisLoading ? this.state.value.analysisValue : this.state.configData.minValue}
             />
           </div>
-          <div style={{ margin: "0 auto", marginBottom: "10px", marginTop: "-10px" }}>
+          <div style={{ margin: "0 auto", marginBottom: "10px", marginTop: "-15px" }}>
             <Skeleton
               width="75px"
               margin="0 auto"
