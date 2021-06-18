@@ -18,8 +18,6 @@ Steps to run this project:
 
 ## II. Container-based Setup
 
-</br>
-
 Services integrated in the system:
 
 - Redis - _port: 6739_
@@ -34,8 +32,6 @@ There are 2 modes that developers can work on in dockerized/container environmen
 Since there are multiple services communicated with each other, we'll utilize Docker-compose to 'compose' a unified work experience for contributors: (_Remember to install Docker first!_)
 
 **For Development**
-
-</br>
 
 1. Run `docker-compose -f docker-compose.dev.yml` to start development environment for all services -> Enable GraphQL playground at port 4000
 
