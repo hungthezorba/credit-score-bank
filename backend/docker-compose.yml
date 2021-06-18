@@ -1,0 +1,37 @@
+version: "3.8"
+services:
+  redis:
+    image: redis
+    restart: unless-stopped
+    networks:
+      - servernet
+  db:
+    image: postgres
+    restart: unless-stopped
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - servernet
+    environment:
+      POSTGRES_PASSWORD: rmit
+      POSTGRES_USER: postgres
+      POSTGRES_DB: credit-score
+  server:
+    image: bietdoikiem/credit-score-bank-backend:latest
+    restart: unless-stopped
+    ports:
+      - 4000:4000
+    networks:
+      - servernet
+    environment:
+      POSTGRES_URL: postgresql://postgres:rmit@db:5432/credit-score
+      REDIS_URL: redis://redis:6379
+      PORT: 4000
+      SESSION_SECRET: secretkeyofquocminhproduction
+      CORS_ORIGIN: http://localhost:3000
+    command: ["node", "build/index.js"]
+
+networks:
+  servernet:
+volumes:
+  pgdata:
