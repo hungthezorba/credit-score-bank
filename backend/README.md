@@ -33,7 +33,7 @@ Since there are multiple services communicated with each other, we'll utilize Do
 
 **For Development**
 
-1. Run `docker-compose -f docker-compose.dev.yml` to start development environment for all services -> Enable GraphQL playground at port 4000
+1. Run `docker-compose -f docker-compose.dev.yml up` to start development environment for all services -> Enable GraphQL playground at port 4000
 
 2. Run `docker-compose down` to close all containers composed in a single network after finishing development stage
 
