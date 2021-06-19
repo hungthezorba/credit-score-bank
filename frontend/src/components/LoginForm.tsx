@@ -13,20 +13,65 @@ import {
 import AppContext from '../store/AppContext'
 import { Redirect, useHistory } from "react-router-dom";
 
+import { useMutation, gql } from '@apollo/client';
 import { Formik, Form, Field, ErrorMessage, FormikErrors, FormikProps, useFormik } from 'formik';
+import Login from "../pages/Login";
 
+
+
+const LOGIN = gql`
+mutation Login($username: String!, $password: String!) {
+	login(options: {username: $username, password: $password}) {
+    user {
+      id
+      username
+    }
+  }
+}
+`;
+
+interface loginInput {
+  username: string,
+  password: string
+}
+
+interface loginData {
+  id: number,
+  username: string
+}
+
+const SAVE_ROCKET = gql`
+  mutation saveRocket($rocket: RocketInput!) {
+    saveRocket(rocket: $rocket) {
+      model
+    }
+  }
+`;
+
+interface RocketInventory {
+  id: number;
+  model: string;
+  year: number;
+  stock: number;
+}
+
+interface NewRocketDetails {
+  model: string;
+  year: number;
+  stock: number;
+}
 
 type event = {
   value: React.ChangeEvent<HTMLInputElement>
 }
 
-interface MyFormValues {
-  username: string,
-  password: string,
-}
 
-const validate = (values: MyFormValues) => {
-  const errors: MyFormValues = { username: '', password: '' };
+const validate = (values: loginInput) => {
+
+
+  const errors: loginInput = { username: '', password: '' };
+
+
   if (!values.username) {
     errors.username = 'Required';
   }
@@ -41,7 +86,7 @@ const LoginForm = () => {
 
   const globalState = useContext(AppContext)
 
-  const initialValues: MyFormValues = { username: '', password: '' }
+  const initialValues: loginInput = { username: '', password: '' }
 
   function validateUsername(value: string) {
     let error
@@ -61,21 +106,26 @@ const LoginForm = () => {
 
   const history = useHistory();
 
+  // apollo hook mutation
+  const [login] = useMutation(LOGIN);
+
   return (
     <Box minW={['100%', '35%']} w={['100%', '35%']} px={12} py={28} borderRadius={20} boxShadow="base">
       <Formik
         initialValues={initialValues}
-        onSubmit={(values, actions) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2))
-            globalState.setAuthenticated(!globalState.authenticated)
-            localStorage.setItem('user', 'tokenabcdef')
-            actions.setSubmitting(false)
-            history.push('/home')
-          }, 1000)
+        onSubmit={async (values, actions) => {
+          login({ variables: values })
+            .then((res) => {
+              globalState.setAuthenticated(true);
+              history.push("/")
+            })
+
+            .catch((err) => {
+              actions.setStatus(err.message)
+            })
         }}
       >
-        {(props) => (
+        {({ status, isSubmitting, errors }) => (
           <Form>
             <Field name="username" validate={validateUsername}>
               {({ field, form }: { field: string, form: any }) => (
@@ -90,16 +140,17 @@ const LoginForm = () => {
               {({ field, form }: { field: string, form: any }) => (
                 <FormControl mt={10} isInvalid={form.errors.password && form.touched.password}>
                   <FormLabel htmlFor="password">Password</FormLabel>
-                  <Input {...field} id="password" />
+                  <Input type="password" {...field} id="password" />
                   <FormErrorMessage>{form.errors.password}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
+            {status}
             <Button
               mt={10}
               w={['100%', '100%']}
               colorScheme="teal"
-              isLoading={props.isSubmitting}
+              isLoading={isSubmitting}
               type="submit"
             >
               Login
