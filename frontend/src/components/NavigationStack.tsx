@@ -2,21 +2,30 @@ import { Text, Stack, Box, Link } from "@chakra-ui/react";
 import { useContext } from 'react'
 import AppContext, { } from '../store/AppContext'
 import { Link as RouterLink } from 'react-router-dom'
+import { useMutation, gql } from '@apollo/client'
 
 interface NavigationItemProps {
   to: string,
   children: string
 }
 
+const LOGOUT = gql`
+  mutation logout {
+    logout
+  }
+`;
+
 function NavigationItem({ children, to = '/', ...rest }: NavigationItemProps): JSX.Element {
   const globalState = useContext(AppContext)
+  const [logout] = useMutation(LOGOUT);
 
   if (children == 'Logout') {
     return (
       <Link as={RouterLink} to={to}>
-        <Text onClick={() => {
+        <Text onClick={async () => {
           globalState.setAuthenticated(false);
-          localStorage.removeItem('user');
+          window.localStorage.removeItem("user")
+          logout()
         }} display="block" {...rest}>
           {children}
         </Text>
@@ -38,7 +47,6 @@ interface NavigationStackProps {
 const NavigationStack: React.FC<NavigationStackProps> = ({ isOpen }) => {
 
   const globalState = useContext(AppContext)
-
   return (
     <Box
       display={{ base: isOpen ? "block" : "none", md: "block" }}

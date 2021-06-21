@@ -12,14 +12,14 @@ const A = () => {
     )
 }
 
-function PrivateRoute({ component, path, children }: { component?: React.FC, path: string, children: React.ReactNode }) {
+function PrivateRoute({ component, path, children, exact }: { exact?: boolean, component?: React.FC, path: string, children: React.ReactNode }) {
 
     const globalState = useContext(AppContext)
 
     return (
         <div>
             {globalState.authenticated ?
-                <Route path={path}>
+                <Route path={path} exact>
                     {children}
                 </Route>
                 :

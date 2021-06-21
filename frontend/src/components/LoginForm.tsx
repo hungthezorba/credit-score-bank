@@ -15,8 +15,6 @@ import { Redirect, useHistory } from "react-router-dom";
 
 import { useMutation, gql } from '@apollo/client';
 import { Formik, Form, Field, ErrorMessage, FormikErrors, FormikProps, useFormik } from 'formik';
-import Login from "../pages/Login";
-
 
 
 const LOGIN = gql`
@@ -34,37 +32,6 @@ interface loginInput {
   username: string,
   password: string
 }
-
-interface loginData {
-  id: number,
-  username: string
-}
-
-const SAVE_ROCKET = gql`
-  mutation saveRocket($rocket: RocketInput!) {
-    saveRocket(rocket: $rocket) {
-      model
-    }
-  }
-`;
-
-interface RocketInventory {
-  id: number;
-  model: string;
-  year: number;
-  stock: number;
-}
-
-interface NewRocketDetails {
-  model: string;
-  year: number;
-  stock: number;
-}
-
-type event = {
-  value: React.ChangeEvent<HTMLInputElement>
-}
-
 
 const validate = (values: loginInput) => {
 
@@ -117,7 +84,8 @@ const LoginForm = () => {
           login({ variables: values })
             .then((res) => {
               globalState.setAuthenticated(true);
-              history.push("/")
+              window.localStorage.setItem("user", "true")
+              history.push("/home")
             })
 
             .catch((err) => {
