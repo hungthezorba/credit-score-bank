@@ -1,7 +1,7 @@
 import React from "react";
 import { useMutation } from "urql";
 import gql from "graphql-tag";
-import "./UploadForm.css";
+import "../assets/css/UploadForm.css";
 
 const uploadMutation = gql`
   mutation($file: Upload!) {

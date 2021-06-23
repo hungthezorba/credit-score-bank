@@ -25,7 +25,11 @@ const History = () => {
         <div className="History">
         <body className="body">
             <div id="content" >
-                <Heading style={{color:"#3445b4", marginLeft: "20px"}} mb={6}>History</Heading>
+                <p className="header" style={{
+                    fontSize: "30px",
+                    textAlign: "center",
+                    fontWeight: "bold"
+                }}>HISTORY</p>
             </div>	
             
             {/* <FilterTable /> */}
