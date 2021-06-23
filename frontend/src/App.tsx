@@ -14,6 +14,7 @@ import AboutUs from './pages/AboutUs';
 import Result from './pages/Result'
 import FileUpload from './pages/FileUpload';
 import History from './pages/History';
+import CustomerUpdate from './pages/CustomerUpdate';
 
 function App() {
 
@@ -40,6 +41,9 @@ function App() {
 
             <PrivateRoute path="/home" >
               <FileUpload />
+            </PrivateRoute>
+            <PrivateRoute path="/customer-update">
+              <CustomerUpdate />
             </PrivateRoute>
             <PrivateRoute path="/result">
               <Result />

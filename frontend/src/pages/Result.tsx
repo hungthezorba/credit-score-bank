@@ -1,6 +1,6 @@
 import React from "react";
 import Speedometer from "../components/Speedometer";
-import "./Result.css";
+import "../assets/css/Result.css";
 import {
   Box,
   Text,
