@@ -35,32 +35,22 @@ export default class CustomerUpdate extends React.Component<ResultPageProps, Res
     };
   }
 
-  validate = (values: MyFormValues) => {
-    const errors: MyFormValues = { firstName: '', lastName: '', dob: '' };
-    if (!values.firstName) {
-      errors.firstName = 'Required';
-    }
-    if (!values.lastName) {
-      errors.lastName = 'Required';
-    }
-      if (!values.dob) {
-      errors.dob = 'Required';
-    }
-    return errors;
-};
-
   validateFirstName(value: any) {
     let error;
-    if (!value) {
+    if(!value) {
       error = "First Name is required";
+    } else if(!(/^([a-zA-Z ]){2,30}$/.test(value))) {
+      error = "Wrong Format. Input again!"
     }
     return error;
   }
 
   validateLastName(value: any) {
     let error;
-    if (!value) {
+    if(!value) {
       error = "Last Name is required";
+    } else if(!(/^([a-zA-Z ]){2,30}$/.test(value))) {
+      error = "Wrong Format. Input again!"
     }
     return error;
   }
@@ -69,6 +59,8 @@ export default class CustomerUpdate extends React.Component<ResultPageProps, Res
     let error;
     if (!value) {
       error = "Date of Birth is required";
+    } else if(!(/^(0[1-9]|[12][0-9]|3[01])[- .](0[1-9]|1[012])[- .](19|20)\d\d$/.test(value))) {
+      error = "Wrong Format. Input again!"
     }
     return error;
   }
@@ -85,6 +77,10 @@ export default class CustomerUpdate extends React.Component<ResultPageProps, Res
                 setTimeout(() => {
                   alert(JSON.stringify(values, null, 2));
                   actions.setSubmitting(false);
+
+                  // POST THE CUSTOMER DATA HERE -> take values and use POST method
+                  console.log(values);
+
                 }, 1000);
               }}
             >
@@ -94,9 +90,9 @@ export default class CustomerUpdate extends React.Component<ResultPageProps, Res
                   {/* First Name */}
                   <Field name="firstName" validate={this.validateFirstName}>
                     {({ field, form }: { field: string, form: any }) => (
-                      <FormControl isInvalid={form.errors.firstName && form.touched.firstName}>
+                      <FormControl isInvalid={form.errors.firstName && form.touched.firstName} isRequired>
                         <FormLabel htmlFor="first-name">First name</FormLabel>
-                        <Input {...field} id="first-name" placeholder="First Name" width="400px"/>
+                        <Input {...field} id="first-name" placeholder="E.g. Duy" width="400px"/>
                         <FormErrorMessage>{form.errors.firstName}</FormErrorMessage>
                       </FormControl>
                     )}
@@ -106,11 +102,9 @@ export default class CustomerUpdate extends React.Component<ResultPageProps, Res
                   <Field name="lastName" validate={this.validateLastName}>
                     {
                     ({ field, form }: { field: string, form: any }) => (
-                      <FormControl
-                        isInvalid={form.errors.lastName && form.touched.lastName}
-                      >
+                      <FormControl isInvalid={form.errors.lastName && form.touched.lastName} style={{marginTop: 20}} isRequired>
                         <FormLabel htmlFor="lastName">Last name</FormLabel>
-                        <Input {...field} id="lastName" placeholder="Last Name" width="400px"/>
+                        <Input {...field} id="lastName" placeholder="E.g. Vo" width="400px"/>
                         <FormErrorMessage>{form.errors.lastName}</FormErrorMessage>
                       </FormControl>
                     )
@@ -121,17 +115,15 @@ export default class CustomerUpdate extends React.Component<ResultPageProps, Res
                   <Field name="dob" validate={this.validateDOB}>
                     {
                     ({ field, form }: { field: string, form: any }) => (
-                      <FormControl
-                        isInvalid={form.errors.dob && form.touched.dob}
-                      >
+                      <FormControl isInvalid={form.errors.dob && form.touched.dob} style={{marginTop: 20}} isRequired>
                         <FormLabel htmlFor="dob">Date of Birth</FormLabel>
-                        <Input {...field} id="dob" placeholder="dd-MM-yyyy" width="400px"/>
+                        <Input {...field} id="dob" placeholder="E.g. 30-12-2021" width="400px"/>
                         <FormErrorMessage>{form.errors.dob}</FormErrorMessage>
                       </FormControl>
                     )
                     }
                   </Field>
-                  <Center>
+                  <Center style={{marginTop: 20}}>
                     <Button
                       mt={4}
                       textColor="white"
@@ -148,7 +140,7 @@ export default class CustomerUpdate extends React.Component<ResultPageProps, Res
               )}
             </Formik>
             <div style={{marginLeft: 150}}>
-                <Image height="270px" width="400px" src={customer} alt="Dan Abramov" />
+                <Image height="320px" width="450px" src={customer} alt="Dan Abramov" />
             </div>
           </Flex>
 
