@@ -22,7 +22,7 @@ interface MyFormValues {
   dob: string
 }
 
-export default class FileUpload extends React.Component<ResultPageProps, ResultPageState> {
+export default class CustomerUpdate extends React.Component<ResultPageProps, ResultPageState> {
   constructor(props: any) {
     super(props);
 
@@ -73,6 +73,7 @@ export default class FileUpload extends React.Component<ResultPageProps, ResultP
     return (
       <div style={{ paddingTop: 100 }}>
         <div className="container">
+          <p className="header">NEW CUSTOMER INPUT</p>
           <Formik
             initialValues={{ firstName: '', lastName: '', dob: '' }}
             onSubmit={(values, actions) => {
