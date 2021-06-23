@@ -22,3 +22,9 @@
     width: 1170px;
   }
 }
+
+p.header {
+    font-size: 30px;
+    text-align: center;
+    font-weight: bold
+}
