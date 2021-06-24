@@ -39,9 +39,7 @@ app = Flask(__name__)
 # App health check
 @app.route("/healthcheck", methods=["GET"])
 def healthcheck():
-  msg = "Model Server is running well at PORT"
-  print(os.getenv("FLASK_APP"))
-  print(constant.PROD)
+  msg = "Model Server is running in {} at port {}".format(os.getenv("FLASK_ENV"),os.getenv("PORT"))
   return jsonify({"message": msg})
 
 #Model pipeline
@@ -137,14 +135,12 @@ def preprocess(df):
 
   prev_data = rebuild_form(df, dict_label=dict_label, dict_continous=dict_continous)
   current_case = filter_case(prev_data, bb_idx, prev_idx)
-  print(prev_data, current_case)
   return prev_data, current_case
 
 
-# Rebuild Form Def Pre-process
-def rebuild_form(df_in, dict_label, dict_continous):
+def rebuild_form(df_in,  dict_label, dict_continous):
   id_to_search =   df_in.SK_ID_CURR[0]
-  if id_to_search in all_data.SK_ID_CURR:
+  if id_to_search in all_data.SK_ID_CURR.unique():
     prev_data = all_data[all_data.SK_ID_CURR == id_to_search]
   else : 
     dict_data = {}
@@ -247,7 +243,6 @@ def allowed_file(filename):
 @app.route("/predict", methods=["GET", "POST"])
 def predict():
   if request.method == "POST":
-    print("POST method called")
     file = request.files['file']
     if file and allowed_file(file.filename):
       filename = secure_filename(file.filename)
@@ -267,8 +262,7 @@ def predict():
     result = get_predictbycase(preprocess_data, case, all_column=all_column)
     result_list = np.ndarray.tolist(result)
     return jsonify({"prediction": result_list})
-    # print("GET Method Called")
-  return 0
+  return
 
 # Execute Flask App
 if __name__ == "__main__":
