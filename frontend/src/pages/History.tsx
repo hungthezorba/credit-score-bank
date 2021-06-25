@@ -28,7 +28,8 @@ const History = () => {
                 <p className="header" style={{
                     fontSize: "30px",
                     textAlign: "center",
-                    fontWeight: "bold"
+                    fontWeight: "bold",
+                    color: "#196b69"
                 }}>HISTORY</p>
             </div>	
             

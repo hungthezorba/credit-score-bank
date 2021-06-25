@@ -474,7 +474,7 @@ section {
   margin-bottom: 20px;
   padding-bottom: 20px;
   position: relative;
-  color: #37517e;
+  color: #196b69;
 }
 
 .section-title h2::before {
@@ -555,6 +555,7 @@ section {
   animation-delay: 0.8s;
   margin-top: 6px;
   border: 2px solid #28cc9e;
+  text-decoration: none;
 }
 
 .about .content .btn-learn-more:hover {
@@ -573,7 +574,7 @@ section {
 .why-us .content h3 {
   font-weight: 400;
   font-size: 34px;
-  color: #37517e;
+  color: #196b69;
 }
 
 .why-us .content h4 {
@@ -622,6 +623,8 @@ section {
   padding-right: 30px;
   outline: none;
   cursor: pointer;
+  text-decoration: none;
+  color: black;
 }
 
 .why-us .accordion-list span {
@@ -698,7 +701,7 @@ section {
 .skills .content h3 {
   font-weight: 700;
   font-size: 32px;
-  color: #37517e;
+  color: #196b69;
   font-family: "Poppins", sans-serif;
 }
 
@@ -1379,11 +1382,12 @@ section {
   transition: 0.3s;
   display: inline-block;
   line-height: 1;
+  text-decoration: none;
 }
 
 #footer .footer-top .footer-links ul a:hover {
   text-decoration: none;
-  color: #47b2e4;
+  color: #28cc9e;
 }
 
 #footer .footer-top .social-links a {
