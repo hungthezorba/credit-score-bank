@@ -90,7 +90,7 @@ export default class CustomerUpdate extends React.Component<ResultPageProps, Res
                   {/* First Name */}
                   <Field name="firstName" validate={this.validateFirstName}>
                     {({ field, form }: { field: string, form: any }) => (
-                      <FormControl isInvalid={form.errors.firstName && form.touched.firstName} isRequired>
+                      <FormControl isInvalid={form.errors.firstName && form.touched.firstName}>
                         <FormLabel htmlFor="first-name">First name</FormLabel>
                         <Input {...field} id="first-name" placeholder="E.g. Duy" width="400px"/>
                         <FormErrorMessage>{form.errors.firstName}</FormErrorMessage>
@@ -102,7 +102,7 @@ export default class CustomerUpdate extends React.Component<ResultPageProps, Res
                   <Field name="lastName" validate={this.validateLastName}>
                     {
                     ({ field, form }: { field: string, form: any }) => (
-                      <FormControl isInvalid={form.errors.lastName && form.touched.lastName} style={{marginTop: 20}} isRequired>
+                      <FormControl isInvalid={form.errors.lastName && form.touched.lastName} style={{marginTop: 20}}>
                         <FormLabel htmlFor="lastName">Last name</FormLabel>
                         <Input {...field} id="lastName" placeholder="E.g. Vo" width="400px"/>
                         <FormErrorMessage>{form.errors.lastName}</FormErrorMessage>
@@ -115,7 +115,7 @@ export default class CustomerUpdate extends React.Component<ResultPageProps, Res
                   <Field name="dob" validate={this.validateDOB}>
                     {
                     ({ field, form }: { field: string, form: any }) => (
-                      <FormControl isInvalid={form.errors.dob && form.touched.dob} style={{marginTop: 20}} isRequired>
+                      <FormControl isInvalid={form.errors.dob && form.touched.dob} style={{marginTop: 20}}>
                         <FormLabel htmlFor="dob">Date of Birth</FormLabel>
                         <Input {...field} id="dob" placeholder="E.g. 30-12-2021" width="400px"/>
                         <FormErrorMessage>{form.errors.dob}</FormErrorMessage>
@@ -127,9 +127,9 @@ export default class CustomerUpdate extends React.Component<ResultPageProps, Res
                     <Button
                       mt={4}
                       textColor="white"
-                      bg="#37517e"
+                      bg="#196b69"
                       height="48px"
-                      width="100px"
+                      width="400px"
                       isLoading={props.isSubmitting}
                       type="submit"
                     >

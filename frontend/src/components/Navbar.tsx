@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
-import { Flex, Spacer, Box, Button, Heading } from "@chakra-ui/react";
+import { Flex, Spacer, Box, Button, Heading, Image, Center } from "@chakra-ui/react";
 import NavigationStack from "./NavigationStack";
 import MenuToggle from "./MenuToggle";
-import Logo from './Logo'
+import Logo from '../assets/img/logo.png';
 import AppContext from '../store/AppContext'
 
 const NavBarContainer:React.FC = ({children}) => {
@@ -33,9 +33,18 @@ const Navbar = () => {
 
   return (
     <NavBarContainer>
-        <Logo
-        w="100px"
-        />
+      <Flex>
+        <Image height="40px" width="40px" src={Logo} alt="Dan Abramov" />
+        <Center >
+          <p style={{
+            fontSize: "25px",
+            marginLeft: "10px",
+            fontStyle: "italic",
+            fontWeight: "bold",
+            color: "#196b69"
+          }}>WiseLender</p>
+        </Center>
+      </Flex>
         <MenuToggle toggle={toggle} isOpen={isOpen}/>
         <NavigationStack isOpen={isOpen}/>
     </NavBarContainer>
