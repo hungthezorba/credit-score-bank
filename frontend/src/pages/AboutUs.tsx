@@ -75,7 +75,7 @@ function AboutUs() {
                     <div className="container" data-aos="fade-up">
 
                         <div className="section-title">
-                        <h2 style={{color:"#196b69"}}>About Us</h2>
+                        <h2>About Us</h2>
                         </div>
 
                         <div className="row content">
@@ -111,7 +111,7 @@ function AboutUs() {
                         <div className="col-lg-7 d-flex flex-column justify-content-center align-items-stretch  order-2 order-lg-1">
 
                             <div className="content">
-                            <h3 style={{color:"#196b69"}}><strong>Frequently asked questions.</strong></h3>
+                            <h3><strong>Frequently asked questions.</strong></h3>
                             <br />
                             </div>
 
@@ -166,7 +166,7 @@ function AboutUs() {
                                 </div>
 
                                 <div className="col-lg-6 pt-4 pt-lg-0 content" data-aos="fade-left" data-aos-delay="100">
-                                    <h3 style={{color:"#196b69"}}>Technology</h3>
+                                    <h3>Technology</h3>
                                     <p className="fst-italic">
                                     Our model based on 5 main factors that affect customer's credit score. From that point, we ensure that our result get the highest accuracy.
                                     </p>
