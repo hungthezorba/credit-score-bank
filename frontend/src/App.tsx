@@ -15,6 +15,7 @@ import Result from './pages/Result'
 import FileUpload from './pages/FileUpload';
 import History from './pages/History';
 import CustomerUpdate from './pages/CustomerUpdate';
+import Footer from '../src/components/NewFooter';
 
 function App() {
 
@@ -52,6 +53,8 @@ function App() {
               <History />
             </PrivateRoute>
           </Switch>
+
+          <Footer />
         </Router>
       </ChakraProvider>
     </AppContext.Provider>

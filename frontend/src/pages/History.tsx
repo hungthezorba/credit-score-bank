@@ -1,4 +1,3 @@
-import {Input, Flex, Heading} from '@chakra-ui/react'
 import {useEffect} from 'react';
 import GlobalFilter from '../components/GlobalFilter';
 
@@ -22,20 +21,21 @@ const History = () => {
     return (
         <>
         <br /><br /><br /><br />
-        <div className="History">
+        <div className="History" style={{paddingTop: 20}}>
         <body className="body">
             <div id="content" >
                 <p className="header" style={{
                     fontSize: "30px",
                     textAlign: "center",
-                    fontWeight: "bold",
-                    color: "#196b69"
+                    fontWeight: "bold"
                 }}>HISTORY</p>
             </div>	
             
             {/* <FilterTable /> */}
             <GlobalFilter />
-            
+
+            {/* Final Padding Page */}
+            <div style={{paddingTop: 100}}></div>
         </body>
         </div>
         </>
