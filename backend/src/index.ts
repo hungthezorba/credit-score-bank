@@ -59,9 +59,6 @@ import CustomerResolver from "./resolver/Customer.resolver";
     retry_strategy: retryStrategy,
     url: process.env.REDIS_URL,
   });
-  // redisClient.on("error", function (err) {
-  //   console.log("Redis error:", err);
-  // });
 
   // Inform Express in terms of Proxy (NGINX)
   app.set("trust proxy", 1);

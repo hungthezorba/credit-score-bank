@@ -24,7 +24,7 @@ services:
     networks:
       - servernet
     environment:
-      POSTGRES_URL: postgresql://postgres:rmit@db:5432/credit-score
+      DATABASE_URL: postgresql://postgres:rmit@db:5432/credit-score
       REDIS_URL: redis://redis:6379
       PORT: 4000
       SESSION_SECRET: secretkeyofquocminhproduction
