@@ -1,0 +1,9 @@
+mutation registerCustomer($options: CustomerInput!) {
+  registerCustomer(options: $options) {
+      customer {
+        firstName
+        lastName
+        dateOfBirth
+      }
+    }
+}
