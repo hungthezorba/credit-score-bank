@@ -19,20 +19,11 @@ import { TemplateResolver } from "./Template.resolver";
 import argon2 from "argon2";
 import { MyContext } from "../types";
 import { ApolloError, UserInputError } from "apollo-server-express";
-import Joi, { ValidationOptions } from "joi";
+import Joi from "joi";
 import { DuplicatedError } from "../response/CustomErrors.response";
 import { COOKIE_NAME } from "../constants";
+import { validateOptions } from "../utils/validateOptions";
 
-// Define Joi validate option
-const validateOptions: ValidationOptions = {
-  abortEarly: false,
-  errors: {
-    wrap: {
-      label: "",
-    },
-  },
-  noDefaults: true,
-};
 // Joi Validation Schema
 const registerSchema = Joi.object({
   username: Joi.string().min(3).max(30).required(),
