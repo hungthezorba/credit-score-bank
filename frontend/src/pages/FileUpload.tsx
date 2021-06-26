@@ -31,6 +31,9 @@ constructor(props: any) {
                 <main>
                     <UploadForm />
                 </main>
+            
+                {/* Final Padding Page */}
+                <div style={{paddingTop: 100}}></div>
             </Provider>
         )
     }

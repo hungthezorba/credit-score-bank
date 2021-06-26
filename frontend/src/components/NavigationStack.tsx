@@ -65,6 +65,7 @@ const NavigationStack: React.FC<NavigationStackProps> = ({ isOpen }) => {
 
         }
         <NavigationItem to="/about">About us</NavigationItem>
+        <NavigationItem to="/customer-update">New Customer</NavigationItem>
         <NavigationItem to="/history">History</NavigationItem>
       </Stack>
     </Box>

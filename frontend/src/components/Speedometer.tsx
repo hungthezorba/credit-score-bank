@@ -6,7 +6,8 @@ const Speedometer = (
     maxValue: number,
     segmentNumber: number,
     segmentColors: string[],
-    resultScore: number
+    resultScore: number,
+    segmentStops: number[]
   }) => {
     // Define basic config for the speedometer
     const segmentLabels: Array<object> = [
@@ -40,6 +41,7 @@ const Speedometer = (
           currentValueText={""}
           customSegmentLabels={segmentLabels}
           segmentColors={props.segmentColors}
+          customSegmentStops={props.segmentStops}
         />
       </>
     );

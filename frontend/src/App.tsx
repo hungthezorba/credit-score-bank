@@ -15,6 +15,8 @@ import Result from './pages/Result'
 import FileUpload from './pages/FileUpload';
 import History from './pages/History';
 import { useQuery, gql } from '@apollo/client';
+import CustomerUpdate from './pages/CustomerUpdate';
+import Footer from '../src/components/NewFooter';
 
 const GET_STATUS = gql`
   query Me {
@@ -49,6 +51,9 @@ function App() {
             <PrivateRoute path="/home" >
               <FileUpload />
             </PrivateRoute>
+            <PrivateRoute path="/customer-update">
+              <CustomerUpdate />
+            </PrivateRoute>
             <PrivateRoute path="/result">
               <Result />
             </PrivateRoute>
@@ -56,6 +61,8 @@ function App() {
               <History />
             </PrivateRoute>
           </Switch>
+
+          <Footer />
         </Router>
       </ChakraProvider>
     </AppContext.Provider>
