@@ -1,17 +1,15 @@
-import { Box } from '@chakra-ui/layout'
-import {Input, Flex, Heading} from '@chakra-ui/react';
-import React, {useEffect, useState} from 'react';
-import { MDBCollapse, MDBBtn, MDBRow, MDBCol } from 'mdb-react-ui-kit';
-import hero from '../assets/img/hero-img.png';
+import { useState } from 'react';
+import { MDBCollapse } from 'mdb-react-ui-kit';
+import Hero from '../assets/img/hero-img.png';
 import whyus from '../assets/img/why-us.png';
 import skills from '../assets/img/skills.png';
-import duy from '../assets/img/duy.jpg';
-import huy from '../assets/img/huy.jpg';
-import thao from '../assets/img/thao.jpg';
-import minh from '../assets/img/minh.jpg';
-import dat from '../assets/img/dat.jpg';
-import hung from '../assets/img/hung.jpg';
-import thien  from '../assets/img/thien.jpg';
+import Duy from '../assets/img/duy.jpg';
+import Huy from '../assets/img/huy.jpg';
+import Thao from '../assets/img/thao.jpg';
+import Minh from '../assets/img/minh.jpg';
+import Dat from '../assets/img/dat.jpg';
+import Hung from '../assets/img/hung.jpg';
+import Thien  from '../assets/img/thien.jpg';
 import '../assets/css/style.css';
 import '../assets/vendor/bootstrap/css/bootstrap.css';
 import '../assets/vendor/bootstrap/css/bootstrap.min.css';
@@ -63,7 +61,7 @@ function AboutUs() {
                                 <h2>FREE and easy way to check your credit score.</h2>
                             </div>
                             <div className="col-lg-6 order-1 order-lg-2 hero-img" >
-                                <img src={hero} className="img-fluid animated" alt="" />
+                                <img src={Hero} className="img-fluid animated" alt="" />
                             </div>
                         </div>
                     </div>
@@ -222,14 +220,14 @@ function AboutUs() {
                     <div className="container" data-aos="fade-up">
 
                         <div className="section-title">
-                        <h2>Team</h2>
+                        <h2 style={{color:"#196b69"}}>Team</h2>
                         </div>
 
                         <div className="row">
 
                             <div className="col-lg-6">
                                 <div className="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="100">
-                                <div className="pic"><img src={duy} className="img-fluid" alt=""/></div>
+                                <div className="pic"><img src={Duy} className="img-fluid" alt=""/></div>
                                 <div className="member-info">
                                     <h4>Duy Vo</h4>
                                     <span>Front-end Developer, Leader</span>
@@ -240,7 +238,7 @@ function AboutUs() {
 
                             <div className="col-lg-6 mt-4 mt-lg-0">
                                 <div className="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="200">
-                                <div className="pic"><img src={huy} className="img-fluid" alt=""/></div>
+                                <div className="pic"><img src={Huy} className="img-fluid" alt=""/></div>
                                 <div className="member-info">
                                     <h4>Duy Vu</h4>
                                     <span>Business </span>
@@ -251,7 +249,7 @@ function AboutUs() {
 
                             <div className="col-lg-6 mt-4">
                                 <div className="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="300">
-                                <div className="pic"><img src={minh} className="img-fluid" alt=""/></div>
+                                <div className="pic"><img src={Minh} className="img-fluid" alt=""/></div>
                                 <div className="member-info">
                                     <h4>Minh Nguyen</h4>
                                     <span>Back-end Developer</span>
@@ -262,7 +260,7 @@ function AboutUs() {
 
                             <div className="col-lg-6 mt-4">
                                 <div className="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="400">
-                                <div className="pic"><img src={thao} className="img-fluid" alt=""/></div>
+                                <div className="pic"><img src={Thao} className="img-fluid" alt=""/></div>
                                 <div className="member-info">
                                     <h4>Thao Vu</h4>
                                     <span>Business</span>
@@ -273,7 +271,7 @@ function AboutUs() {
 
                             <div className="col-lg-6 mt-4">
                                 <div className="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="400">
-                                <div className="pic"><img src={dat} className="img-fluid" alt=""/></div>
+                                <div className="pic"><img src={Dat} className="img-fluid" alt=""/></div>
                                 <div className="member-info">
                                     <h4>Dat Ngo</h4>
                                     <span>Data engineer</span>
@@ -284,18 +282,20 @@ function AboutUs() {
 
                             <div className="col-lg-6 mt-4">
                                 <div className="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="400">
-                                <div className="pic"><img src={hung} className="img-fluid" alt=""/></div>
+                                <div className="pic"><img src={Hung} className="img-fluid" alt=""/></div>
                                 <div className="member-info">
                                     <h4>Hung Nguyen</h4>
                                     <span>Front-end Developer</span>
-                                    <p>My friends say that I'm strong, not because I have six-pack, but cuz I often carry them.</p>
+                                    <p>My friends say that I'm strong,</p>
+                                    <p>not because I have six-pack,</p>
+                                    <p>but cuz I often carry them.</p>
                                 </div>
                                 </div>
                             </div>
 
                             <div className="col-lg-6 mt-4">
                                 <div className="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="400">
-                                <div className="pic"><img src={thien} className="img-fluid" alt=""/></div>
+                                <div className="pic"><img src={Thien} className="img-fluid" alt=""/></div>
                                 <div className="member-info">
                                     <h4>Thien Nguyen</h4>
                                     <span>Front-end Developer</span>
@@ -317,7 +317,7 @@ function AboutUs() {
                 <div className="container" data-aos="fade-up">
 
                     <div className="section-title">
-                    <h2>Contact</h2>
+                    <h2 style={{color:"#196b69"}}>Contact</h2>
                     </div>
 
                     <div className="row">
@@ -339,7 +339,7 @@ function AboutUs() {
                         <div className="phone">
                             <i className="bi bi-phone"></i>
                             <h4>Call:</h4>
-                            <p>+84 935353535</p>
+                            <p>+84 123456789</p>
                         </div>
 
                         </div>
@@ -379,71 +379,7 @@ function AboutUs() {
 
                 </div>
                 </section>
-                {/* Encontact */}
-
-                {/* Footer */}
-               
-                <footer id="footer">
-
-                    
-
-                    <div className="footer-top">
-                    <div className="container">
-                        <div className="row">
-
-                        <div className="col-lg-3 col-md-6 footer-contact">
-                            <h3>RMIT</h3>
-                            <p>
-                            702 Nguyen Van Linh Street <br/>
-                            Ho Chi Minh city,<br/>
-                            Viet Nam. <br/><br/>
-                            <strong>Phone:</strong> +84 935353535<br/>
-                            <strong>Email:</strong> info@example.com<br/>
-                            </p>
-                        </div>
-
-                        <div className="col-lg-3 col-md-6 footer-links">
-                            <h4>Useful Links</h4>
-                            <ul>
-                            <li><i className="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-                            <li><i className="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-                            <li><i className="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-                            <li><i className="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-                            <li><i className="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-                            </ul>
-                        </div>
-
-                        <div className="col-lg-3 col-md-6 footer-links">
-                            <h4>Our Services</h4>
-                            <ul>
-                            <li><i className="bx bx-chevron-right"></i> <a href="#">Mobile Development</a></li>
-                            <li><i className="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-                            <li><i className="bx bx-chevron-right"></i> <a href="#">Data Analytics</a></li>
-                            <li><i className="bx bx-chevron-right"></i> <a href="#">Machine Learning</a></li>
-                            <li><i className="bx bx-chevron-right"></i> <a href="#">Cloud & Security</a></li>
-                            </ul>
-                        </div>
-
-                        <div className="col-lg-3 col-md-6 footer-links">
-                            <h4 style={{color:"white"}}>Our Social Networks</h4>
-                            <div className="social-links mt-3">
-                            <a href="#" className="twitter"><i className="bx bxl-twitter"></i></a>
-                            <a href="#" className="facebook"><i className="bx bxl-facebook"></i></a>
-                            <a href="#" className="instagram"><i className="bx bxl-instagram"></i></a>
-                            <a href="#" className="google-plus"><i className="bx bxl-skype"></i></a>
-                            <a href="#" className="linkedin"><i className="bx bxl-linkedin"></i></a>
-                            </div>
-                        </div>
-
-                        </div>
-                    </div>
-                    </div>
-
-
-                </footer>
-                {/* End Footer */}
-                
-
+                {/* End Contact */}                
             </body>
         </div>
     )

@@ -1,6 +1,6 @@
 import React, {FC, useState} from 'react';
 import {Input, Flex, Heading, filter} from '@chakra-ui/react';
-import './table.css';
+import '../assets/css/Table.css';
 
 interface Customer{
     name: string;

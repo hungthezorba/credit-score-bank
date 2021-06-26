@@ -1,6 +1,6 @@
 import React from "react";
 import Speedometer from "../components/Speedometer";
-import "./Result.css";
+import "../assets/css/Result.css";
 import {
   Box,
   Text,
@@ -29,7 +29,8 @@ interface ResultPageState {
     minValue: number,
     maxValue: number,
     segmentNumber: number,
-    segmentColors: string[]
+    segmentColors: string[],
+    segmentStops: number[]
   }
 }
 
@@ -40,7 +41,7 @@ export default class Result extends React.Component<ResultPageProps, ResultPageS
     // Mock data
     this.state = {
       value: {
-        analysisValue: 89,
+        analysisValue: 58,
         paymentHistory: 80,
         amountOwed: 70,
         creditHistoryLength: 64,
@@ -54,15 +55,20 @@ export default class Result extends React.Component<ResultPageProps, ResultPageS
         minValue: 0,
         maxValue: 99,
         segmentNumber: 3,
-        segmentColors: ["#a32330", "#e9af4b", "#9fc54c"]
+        segmentColors: ["#a32330", "#e9af4b", "#9fc54c"],
+        segmentStops: [0, 40, 60, 99]
       }
     };
   }
   // Take the value and define its color
   textColor(value: number): string {
-    const distance: number = (this.state.configData.maxValue - this.state.configData.minValue) / this.state.configData.segmentNumber;
-    const seg = Math.floor((value - this.state.configData.minValue) / distance);
-    return this.state.configData.segmentColors[seg];
+    let segmentStops = this.state.configData.segmentStops;
+    for(let i = 0; i < 3; i++) {
+      if(value >= segmentStops[i] && value < segmentStops[i+1]) {
+        return this.state.configData.segmentColors[i];
+      }
+    }
+    return this.state.configData.segmentColors[0];    
   }
 
   render() {
@@ -78,6 +84,7 @@ export default class Result extends React.Component<ResultPageProps, ResultPageS
               segmentNumber={this.state.configData.segmentNumber}
               segmentColors={this.state.configData.segmentColors}
               resultScore={!this.state.loading.analysisLoading ? this.state.value.analysisValue : this.state.configData.minValue}
+              segmentStops={this.state.configData.segmentStops}
             />
           </div>
           <div style={{ margin: "0 auto", marginBottom: "10px", marginTop: "-15px" }}>
@@ -137,7 +144,7 @@ export default class Result extends React.Component<ResultPageProps, ResultPageS
                 backgroundColor="#f1f4fb"
               >
                 <HStack color="white" spacing="10px">
-                  <Box w="10px" h="80px" bg="#4FD1C5"></Box>
+                  <Box w="10px" h="80px" bg="#F6E05E"></Box>
                   <Box w="280px" h="80px" paddingTop="7px" paddingBottom="7px">
                     <Skeleton
                       width="50px"
@@ -166,92 +173,6 @@ export default class Result extends React.Component<ResultPageProps, ResultPageS
               >
                 <HStack color="white" spacing="10px">
                   <Box w="10px" h="80px" bg="#4FD1C5"></Box>
-                  <Box w="280px" h="80px" paddingTop="7px" paddingBottom="7px">
-                    <Skeleton
-                      width="50px"
-                      height="36px"
-                      noOfLines={1}
-                      isLoaded={!this.state.loading.analysisLoading}
-                    >
-                      <Text color="#2C5282" fontSize="2xl" fontWeight="bold">
-                        {this.state.value.amountOwed}%
-                      </Text>
-                    </Skeleton>
-                    <Box color="#94979e">Amount Owed</Box>
-                  </Box>
-                </HStack>
-              </Box>
-            </Flex>
-
-            {/* Second */}
-            <Flex marginTop="20px">
-              {/* First */}
-              <Box
-                maxW="300px"
-                height="80px"
-                borderWidth="1px"
-                borderRadius="lg"
-                overflow="hidden"
-                backgroundColor="#f1f4fb"
-              >
-                <HStack color="white" spacing="10px">
-                  <Box w="10px" h="80px" bg="#F6E05E"></Box>
-                  <Box w="280px" h="80px" paddingTop="7px" paddingBottom="7px">
-                    <Skeleton
-                      width="50px"
-                      height="36px"
-                      noOfLines={1}
-                      isLoaded={!this.state.loading.analysisLoading}
-                    >
-                      <Text color="#2C5282" fontSize="2xl" fontWeight="bold">
-                        {this.state.value.paymentHistory}%
-                      </Text>
-                    </Skeleton>
-                    <Box color="#94979e">Payment History</Box>
-                  </Box>
-                </HStack>
-              </Box>
-              <Spacer />
-
-              {/* Second */}
-              <Box
-                maxW="300px"
-                height="80px"
-                borderWidth="1px"
-                borderRadius="lg"
-                overflow="hidden"
-                backgroundColor="#f1f4fb"
-              >
-                <HStack color="white" spacing="10px">
-                  <Box w="10px" h="80px" bg="#F6E05E"></Box>
-                  <Box w="280px" h="80px" paddingTop="7px" paddingBottom="7px">
-                    <Skeleton
-                      width="50px"
-                      height="36px"
-                      noOfLines={1}
-                      isLoaded={!this.state.loading.analysisLoading}
-                    >
-                      <Text color="#2C5282" fontSize="2xl" fontWeight="bold">
-                        {this.state.value.creditHistoryLength}%
-                      </Text>
-                    </Skeleton>
-                    <Box color="#94979e">Length of Credit History</Box>
-                  </Box>
-                </HStack>
-              </Box>
-              <Spacer />
-
-              {/* Third */}
-              <Box
-                maxW="300px"
-                height="80px"
-                borderWidth="1px"
-                borderRadius="lg"
-                overflow="hidden"
-                backgroundColor="#f1f4fb"
-              >
-                <HStack color="white" spacing="10px">
-                  <Box w="10px" h="80px" bg="#F6E05E"></Box>
                   <Box w="280px" h="80px" paddingTop="7px" paddingBottom="7px">
                     <Skeleton
                       width="50px"
@@ -270,7 +191,7 @@ export default class Result extends React.Component<ResultPageProps, ResultPageS
             </Flex>
 
             {/* Final padding page */}
-            <div style={{ padding: 100 }}></div>
+            <div style={{ padding: 50 }}></div>
           </div>
         </div>
       </div>
