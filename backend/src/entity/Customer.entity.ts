@@ -14,7 +14,7 @@ export class Customer extends TemplateEntity {
   @Column()
   lastName!: string;
 
-  @Field(() => Date)
+  @Field(() => String)
   @Column({ type: "date", nullable: true })
   dateOfBirth: Date;
 

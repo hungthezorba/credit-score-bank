@@ -14,11 +14,19 @@ import AboutUs from './pages/AboutUs';
 import Result from './pages/Result'
 import FileUpload from './pages/FileUpload';
 import History from './pages/History';
+import { useQuery, gql } from '@apollo/client';
 import CustomerUpdate from './pages/CustomerUpdate';
 import Footer from '../src/components/NewFooter';
 
-function App() {
+const GET_STATUS = gql`
+  query Me {
+	me {
+    id
+  }
+}
+`;
 
+function App() {
   const [authenticated, setAuthenticated] = useState(localStorage.getItem('user') ? true : false)
 
   let state: AppContextInterface = {

@@ -5,30 +5,30 @@ import MenuToggle from "./MenuToggle";
 import Logo from '../assets/img/logo.png';
 import AppContext from '../store/AppContext'
 
-const NavBarContainer:React.FC = ({children}) => {
-    return (
-      <Flex
-        // id="header"
-        className="fixed-top"
-        as="nav"
-        align="center"
-        justify="space-between"
-        wrap="wrap"
-        w="100%"
-        mb={8}
-        px={20}
-        py={5}
-        style={{backgroundColor: 'white', color: 'black', borderBottomColor: '#ccc', borderBottomWidth: 1}}
-      >
-        {children}
-      </Flex>
-    )
-  }
+const NavBarContainer: React.FC = ({ children }) => {
+  return (
+    <Flex
+      // id="header"
+      className="fixed-top"
+      as="nav"
+      align="center"
+      justify="space-between"
+      wrap="wrap"
+      w="100%"
+      mb={8}
+      px={20}
+      py={5}
+      style={{ backgroundColor: 'white', color: 'black', borderBottomColor: '#ccc', borderBottomWidth: 1 }}
+    >
+      {children}
+    </Flex>
+  )
+}
 
 const Navbar = () => {
-    const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
 
-    const toggle = () => setIsOpen(!isOpen)
+  const toggle = () => setIsOpen(!isOpen)
 
 
   return (
@@ -45,8 +45,8 @@ const Navbar = () => {
           }}>WiseLender</p>
         </Center>
       </Flex>
-        <MenuToggle toggle={toggle} isOpen={isOpen}/>
-        <NavigationStack isOpen={isOpen}/>
+      <MenuToggle toggle={toggle} isOpen={isOpen} />
+      <NavigationStack isOpen={isOpen} />
     </NavBarContainer>
   );
 };

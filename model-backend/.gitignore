@@ -1,0 +1,15 @@
+# created by virtualenv automatically
+__pycache__
+Lib
+Scripts
+**/.vscode/
+pyvenv.cfg
+
+# Ignore env file
+.flaskenv
+
+# Ignore Data CSV input
+HomeCredit/*
+
+# Exclude model directory
+!HomeCredit/model

@@ -5,7 +5,7 @@ import "dotenv-safe/config";
 
 const config: ConnectionOptions = {
   type: "postgres",
-  url: process.env.POSTGRES_URL as string,
+  url: process.env.DATABASE_URL as string,
   synchronize: false,
   logging: !__prod__,
   entities: [path.join(__dirname, "./entity/*")],

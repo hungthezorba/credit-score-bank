@@ -9,7 +9,11 @@ import { User } from "./User.entity";
 export class CreditHistory extends TemplateEntity {
   @Field()
   @Column({ type: "float", nullable: true })
-  creditScore!: number;
+  negScore!: number;
+
+  @Field()
+  @Column({ type: "float", nullable: true })
+  posScore!: number;
 
   // **RELATIONSHIPS** //
   @Field(() => Customer)

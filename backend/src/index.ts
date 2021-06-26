@@ -14,6 +14,7 @@ import session from "express-session";
 import connectRedis from "connect-redis";
 import { COOKIE_NAME, __prod__ } from "./constants";
 import { UserResolver } from "./resolver/User.resolver";
+import CustomerResolver from "./resolver/Customer.resolver";
 
 // *** MAIN Node.js Application *** //
 (async () => {
@@ -58,9 +59,6 @@ import { UserResolver } from "./resolver/User.resolver";
     retry_strategy: retryStrategy,
     url: process.env.REDIS_URL,
   });
-  // redisClient.on("error", function (err) {
-  //   console.log("Redis error:", err);
-  // });
 
   // Inform Express in terms of Proxy (NGINX)
   app.set("trust proxy", 1);
@@ -95,7 +93,7 @@ import { UserResolver } from "./resolver/User.resolver";
   // Initialize Apollo back-end server //
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [HelloResolver, UserResolver],
+      resolvers: [HelloResolver, UserResolver, CustomerResolver],
       validate: false,
       container: Container,
     }),
