@@ -14,7 +14,7 @@ import {
   useDisclosure,
   ModalOverlay
 } from "@chakra-ui/react";
-import { CheckIcon } from '@chakra-ui/icons'
+import { CheckIcon } from '@chakra-ui/icons';
 import { Formik, Form, Field } from "formik";
 import { useMutation, gql } from "@apollo/client";
 import customer_picture from "../assets/img/customer.jpg";
