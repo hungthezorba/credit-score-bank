@@ -97,7 +97,7 @@ const CustomerUpdate = () => {
                   setValidate(true);
                   setTimeout(() => {
                     window.location.reload();
-                  }, 2000);
+                  }, 3000);
                 })
                 .catch((err) => {
                   alert(JSON.stringify(err, null, 2));

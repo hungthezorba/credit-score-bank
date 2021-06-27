@@ -20,7 +20,7 @@
     "axios": "^0.21.1",
     "formik": "^2.2.9",
     "framer-motion": "^4.1.17",
-    "graphql": "^15.5.0",
+    "graphql": "^15.5.1",
     "graphql-tag": "^2.12.4",
     "mdb-react-ui-kit": "^1.0.0-beta7",
     "react": "^17.0.2",

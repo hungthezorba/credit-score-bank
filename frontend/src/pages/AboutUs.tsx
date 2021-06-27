@@ -241,7 +241,7 @@ function AboutUs() {
                                 <div className="pic"><img src={Huy} className="img-fluid" alt=""/></div>
                                 <div className="member-info">
                                     <h4>Duy Vu</h4>
-                                    <span>Business </span>
+                                    <span>Business Analyst, Marketing Researcher</span>
                                     <p>hm ..............</p>
                                 </div>
                                 </div>
@@ -263,7 +263,7 @@ function AboutUs() {
                                 <div className="pic"><img src={Thao} className="img-fluid" alt=""/></div>
                                 <div className="member-info">
                                     <h4>Thao Vu</h4>
-                                    <span>Business</span>
+                                    <span>Business Analyst, Marketing Researcher</span>
                                     <p>Many people often get confusued about my age.</p>
                                 </div>
                                 </div>

@@ -49,3 +49,40 @@ p.result-score {
     font-size: 40px;
     font-weight: bold;
 }
+
+.custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+.custom-file-input{
+  width: 224.66px;
+  height: 162px;
+}
+
+.custom-file-input::before {
+  content: 'Drop a file to analyze';
+  display: inline-block;
+  background-color: #C4C4C4;
+  padding: 70px 40px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.form-container {
+    width: 500px;
+    height: 400px;
+    margin: 0 auto;  
+    align-items: center;  
+    position: relative;
+    margin-top: 120px;
+    background-color: #EDEDED;
+    background-image: url("data:image/svg+xml,%3csvg width='40%25' height='40%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='black' stroke-width='2' stroke-dasharray='6%2c 14' stroke-dashoffset='3' stroke-linecap='square'/%3e%3c/svg%3e");
+}
+
+.form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

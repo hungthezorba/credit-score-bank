@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { createClient, dedupExchange, cacheExchange, Provider } from "urql";
 import { multipartFetchExchange } from "@urql/exchange-multipart-fetch";
-import UploadForm from "../components/UploadForm";
 import {
   Box,
   Text,
@@ -14,7 +13,6 @@ import {
   Button,
   Input,
   Flex,
-  Image,
   Center,
   Modal,
   ModalContent,
@@ -30,30 +28,24 @@ import Speedometer from "../components/Speedometer";
 import { useMutation, gql } from "@apollo/client";
 
 const RESULT = gql`
-  mutation registerCustomer(
-    $firstName: String!
-    $lastName: String!
-    $dateOfBirth: String!
+  mutation recordCustomerScore(
+    $customerId: Float!
+    $posScore: Float!
+    $negScore: Float!
   ) {
-    registerCustomer(
+    recordCustomerScore(
       options: {
-        firstName: $firstName
-        lastName: $lastName
-        dateOfBirth: $dateOfBirth
+        customerId: $customerId
+        posScore: $posScore
+        negScore: $negScore
       }
-    ) {
-      customer {
-        firstName
-        lastName
-        dateOfBirth
-      }
-    }
+    )
   }
 `;
 
 const FileUpload = () => {
   // Check when upload the file successfully
-  const [uploadSuccess, setUploadSuccess] = useState(true);
+  const [uploadSuccess, setUploadSuccess] = useState(false);
 
   // Check when click on save button successfully
   const [validate, setValidate] = useState(false);
@@ -93,13 +85,14 @@ const FileUpload = () => {
     return configData.segmentColors[0];
   }
 
-  function validateId(value: any) {
+  function validateId(value: number) {
     let error;
     if (!value) {
       error = "Customer ID is required";
-    } else if (!/^\d*$/.test(value)) {
-      error = "Wrong Format. Input again!";
     }
+    // } else if (!Number.isInteger(value)) {
+    //   error = "Wrong Format. Input again!";
+    // }
     return error;
   }
 
@@ -116,7 +109,16 @@ const FileUpload = () => {
       {!uploadSuccess ? (
         <Provider value={client}>
           <main>
-            <UploadForm />
+            <div className="form-container">
+              <div className="form">
+                <input
+                  type="file"
+                  className="custom-file-input"
+                  // onChange={handleChange}
+                  required
+                />
+              </div>
+            </div>
           </main>
         </Provider>
       ) : (
@@ -310,8 +312,8 @@ const FileUpload = () => {
           ) : (
             <div>
               {/* Save Form */}
-              <Modal 
-                isOpen={isOpen} 
+              <Modal
+                isOpen={isOpen}
                 onClose={onClose}
                 isCentered={true}
                 motionPreset={"slideInBottom"}
@@ -325,28 +327,22 @@ const FileUpload = () => {
                       negScore: 1 - value.analysisValue,
                     }}
                     onSubmit={(values, actions) => {
-                      // customer({ variables: values })
-                      //   .then(() => {
-                      //     setValidate(true);
-                      //     setTimeout(() => {
-                      //       window.location.reload();
-                      //     }, 2000);
-                      //   })
-                      //   .catch((err) => {
-                      //     alert(JSON.stringify(err, null, 2));
-                      //     actions.setStatus(err.message);
-                      //   });
-                      // setTimeout(() => {
-                      //   alert(JSON.stringify(values, null, 2));
-                      //   actions.setSubmitting(false);
-
-                      //   // POST THE CUSTOMER DATA HERE -> take values and use POST method
-                      //   console.log(values);
-                      // }, 1000);
-                      setValidate(true);
-                      setTimeout(() => {
-                        setUploadSuccess(false);
-                      }, 3000);
+                      // alert(typeof values.customerId)
+                      result({ variables: {
+                        customerId: Number(values.customerId),
+                        posScore: values.posScore,
+                        negScore: values.negScore
+                      } })
+                        .then(() => {
+                          setValidate(true);
+                          setTimeout(() => {
+                            setUploadSuccess(false);
+                          }, 3000);
+                        })
+                        .catch((err) => {
+                          alert(JSON.stringify(err, null, 2));
+                          actions.setStatus(err.message);
+                        });
                     }}
                   >
                     {() => (
