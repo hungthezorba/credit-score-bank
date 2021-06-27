@@ -12,11 +12,11 @@ import {
   ModalContent,
   ModalBody,
   useDisclosure,
-  ModalOverlay,
+  ModalOverlay
 } from "@chakra-ui/react";
+import { CheckIcon } from '@chakra-ui/icons'
 import { Formik, Form, Field } from "formik";
 import { useMutation, gql } from "@apollo/client";
-
 import customer_picture from "../assets/img/customer.jpg";
 
 const CUSTOMER = gql`
@@ -198,17 +198,20 @@ const CustomerUpdate = () => {
                     <ModalOverlay />
                     <ModalContent>
                       <ModalBody>
-                        <p
-                          style={{
-                            fontSize: "20px",
-                            textAlign: "center",
-                            fontWeight: "bold",
-                            color: "#196b69",
-                            fontStyle: "italic",
-                          }}
-                        >
-                          Created successfully!
-                        </p>
+                        <Flex style={{marginLeft: "50px"}}>
+                          <CheckIcon w={8} h={8} color="green" />
+                          <p
+                            style={{
+                              fontSize: "20px",
+                              marginLeft: "5px",
+                              textAlign: "center",
+                              fontWeight: "bold",
+                              fontStyle: "italic",
+                            }}
+                          >
+                            Created successfully!
+                          </p>
+                        </Flex>
                       </ModalBody>
                     </ModalContent>
                   </Modal>
