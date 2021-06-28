@@ -1,6 +1,4 @@
-import { useState } from "react";
-import { createClient, dedupExchange, cacheExchange, Provider } from "urql";
-import { multipartFetchExchange } from "@urql/exchange-multipart-fetch";
+import { useState, useEffect } from "react";
 import {
   Box,
   Text,
@@ -51,25 +49,26 @@ const FileUpload = () => {
   const [validate, setValidate] = useState(false);
 
   // Check model loading
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  // Score fetching from Model
+  const [posScore, setPosScore] = useState(0);
 
   // Data config for speedometer
-  const [configData, setConfigData] = useState({
+  const configData = {
     minValue: 0,
     maxValue: 99,
     segmentNumber: 3,
     segmentColors: ["#a32330", "#e9af4b", "#9fc54c"],
     segmentStops: [0, 40, 60, 99],
-  });
+  };
 
-  // Fetching value
-  const [value, setValue] = useState({
-    customerId: 1,
-    analysisValue: 0.52,
+  // Fixed value
+  const value = {
     paymentHistory: 80,
     amountOwed: 70,
     creditHistoryLength: 64,
-  });
+  };
 
   // Modal State
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -85,44 +84,78 @@ const FileUpload = () => {
     return configData.segmentColors[0];
   }
 
-  function validateId(value: number) {
+  function validateId(value: string) {
     let error;
     if (!value) {
       error = "Customer ID is required";
+    } else if (!/^\d+$/.test(value)) {
+      error = "Wrong Format. Input again!";
     }
-    // } else if (!Number.isInteger(value)) {
-    //   error = "Wrong Format. Input again!";
-    // }
     return error;
   }
+
+  // Handle file upload
+  async function handleFileUpload(event: any) {
+    setUploadSuccess(true);
+
+    const file = event.target.files[0];
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    let url = "http://localhost:5000/predict";
+
+    axios
+      .post(url, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((result) => {
+        setLoading(false);
+        setPosScore(result.data.prediction[0]);
+      })
+      .catch((error) => {
+        console.log(JSON.stringify(error, null, 2));
+        alert("Error happened. Try uploading the file again!");
+      });
+  }
+
+  // Delete actions for deleting button
+  function deleteOption() {
+    setUploadSuccess(false);
+    setLoading(true);
+    setPosScore(0);
+    setValidate(false);
+    window.scrollTo(0, 0);
+  }
+
+  // Scrolling the page to top whenever being rendered
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // Apollo hook mutation
   const [result] = useMutation(RESULT);
 
-  const client = createClient({
-    url: "something", // The graphql query url
-    exchanges: [dedupExchange, cacheExchange, multipartFetchExchange],
-  });
-
   return (
     <div>
+      {/* Upload file page */}
       {!uploadSuccess ? (
-        <Provider value={client}>
-          <main>
-            <div className="form-container">
-              <div className="form">
-                <input
-                  type="file"
-                  className="custom-file-input"
-                  // onChange={handleChange}
-                  required
-                />
-              </div>
-            </div>
-          </main>
-        </Provider>
+        <div className="form-container">
+          <div className="form">
+            <input
+              type="file"
+              accept=".csv,.xlsx,.xls"
+              className="custom-file-input"
+              onChange={handleFileUpload}
+              required
+            />
+          </div>
+        </div>
       ) : (
         <div className="container">
+
           {/* Score Section */}
           <div style={{ marginTop: 120 }}>
             <p className="header">CREDIT SCORE</p>
@@ -133,7 +166,9 @@ const FileUpload = () => {
                 segmentNumber={configData.segmentNumber}
                 segmentColors={configData.segmentColors}
                 resultScore={
-                  !loading ? value.analysisValue * 100 : configData.minValue
+                  !loading
+                    ? Number((posScore * 100).toFixed())
+                    : configData.minValue
                 }
                 segmentStops={configData.segmentStops}
               />
@@ -145,14 +180,14 @@ const FileUpload = () => {
                 marginTop: "-15px",
               }}
             >
-              <Skeleton width="75px" margin="0 auto" isLoaded={!loading}>
+              <Skeleton width="120px" margin="0 auto" isLoaded={!loading}>
                 <p
                   className="result-score"
                   style={{
-                    color: textColor(value.analysisValue),
+                    color: textColor(posScore * 100),
                   }}
                 >
-                  {value.analysisValue * 100}
+                  {Number((posScore * 100).toFixed(2))}
                 </p>
               </Skeleton>
             </div>
@@ -162,10 +197,8 @@ const FileUpload = () => {
             {/* Analytics Section */}
             <div style={{ marginTop: "30px" }}>
               <p className="header">ANALYSIS</p>
-
-              {/* First */}
-
               <Flex marginTop="30px">
+
                 {/* First */}
                 <Box
                   maxW="300px"
@@ -199,6 +232,7 @@ const FileUpload = () => {
                 </Box>
 
                 <Spacer />
+
                 {/* Second */}
                 <Box
                   maxW="300px"
@@ -232,6 +266,7 @@ const FileUpload = () => {
                 </Box>
 
                 <Spacer />
+
                 {/* Third */}
                 <Box
                   maxW="300px"
@@ -266,19 +301,38 @@ const FileUpload = () => {
               </Flex>
             </div>
           </div>
-
-          {/* Save Button */}
           <Center style={{ paddingTop: 50 }}>
-            <Button
-              onClick={onOpen}
-              mt={5}
-              textColor="white"
-              bg="#196b69"
-              height="48px"
-              width="250px"
-            >
-              Save the record
-            </Button>
+            <Flex>
+
+              {/* Save Button */}
+              <Button
+                onClick={onOpen}
+                mt={5}
+                textColor="white"
+                bg="#196b69"
+                height="48px"
+                width="250px"
+              >
+                Save the record
+              </Button>
+
+              {/* Space */}
+              <div style={{ width: 50 }}></div>
+
+              {/* Delete Button */}
+              <Button
+                onClick={() => {
+                  onClose();
+                  deleteOption();
+                }}
+                mt={5}
+                colorScheme="red"
+                height="48px"
+                width="250px"
+              >
+                Delete the record
+              </Button>
+            </Flex>
           </Center>
 
           {/* Modal for Success Announcement*/}
@@ -311,6 +365,7 @@ const FileUpload = () => {
             </Modal>
           ) : (
             <div>
+
               {/* Save Form */}
               <Modal
                 isOpen={isOpen}
@@ -323,30 +378,44 @@ const FileUpload = () => {
                   <Formik
                     initialValues={{
                       customerId: "",
-                      posScore: value.analysisValue,
-                      negScore: 1 - value.analysisValue,
+                      posScore: posScore,
+                      negScore: 1 - posScore,
                     }}
                     onSubmit={(values, actions) => {
-                      // alert(typeof values.customerId)
-                      result({ variables: {
-                        customerId: Number(values.customerId),
-                        posScore: values.posScore,
-                        negScore: values.negScore
-                      } })
+                      result({
+                        variables: {
+                          customerId: Number(values.customerId),
+                          posScore: values.posScore,
+                          negScore: values.negScore,
+                        },
+                      })
                         .then(() => {
                           setValidate(true);
                           setTimeout(() => {
                             setUploadSuccess(false);
+                            setLoading(true);
+                            setPosScore(0);
+                            setValidate(false);
+                            onClose();
+                            window.scrollTo(0, 0);
                           }, 3000);
                         })
                         .catch((err) => {
-                          alert(JSON.stringify(err, null, 2));
+                          alert(
+                            JSON.stringify(
+                              err.graphQLErrors[0].extensions.validationErrors
+                                .message,
+                              null,
+                              2
+                            )
+                          );
                           actions.setStatus(err.message);
                         });
                     }}
                   >
                     {() => (
                       <Form style={{ marginLeft: 50 }}>
+
                         {/* First Name */}
                         <Field name="customerId" validate={validateId}>
                           {({ field, form }: { field: string; form: any }) => (

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   FormControl,
   FormLabel,
@@ -12,9 +12,9 @@ import {
   ModalContent,
   ModalBody,
   useDisclosure,
-  ModalOverlay
+  ModalOverlay,
 } from "@chakra-ui/react";
-import { CheckIcon } from '@chakra-ui/icons';
+import { CheckIcon } from "@chakra-ui/icons";
 import { Formik, Form, Field } from "formik";
 import { useMutation, gql } from "@apollo/client";
 import customer_picture from "../assets/img/customer.jpg";
@@ -42,6 +42,7 @@ const CUSTOMER = gql`
 `;
 
 const CustomerUpdate = () => {
+  // Check if the customer created successfully
   const [validate, setValidate] = useState(false);
 
   function validateFirstName(value: any) {
@@ -77,6 +78,11 @@ const CustomerUpdate = () => {
     }
     return error;
   }
+
+  // Scrolling the page to top whenever being rendered
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // Apollo hook mutation
   const [customer] = useMutation(CUSTOMER);
@@ -198,7 +204,7 @@ const CustomerUpdate = () => {
                     <ModalOverlay />
                     <ModalContent>
                       <ModalBody>
-                        <Flex style={{marginLeft: "50px"}}>
+                        <Flex style={{ marginLeft: "50px" }}>
                           <CheckIcon w={8} h={8} color="green" />
                           <p
                             style={{
@@ -218,7 +224,6 @@ const CustomerUpdate = () => {
                 ) : (
                   <></>
                 )}
-
               </Form>
             )}
           </Formik>
