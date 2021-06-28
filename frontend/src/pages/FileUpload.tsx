@@ -146,7 +146,7 @@ const FileUpload = () => {
           <div className="form">
             <input
               type="file"
-              accept=".csv,.xlsx,.xls"
+              accept=".csv"
               className="custom-file-input"
               onChange={handleFileUpload}
               required
