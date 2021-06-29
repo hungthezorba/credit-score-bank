@@ -6,15 +6,11 @@ const Speedometer = (
     maxValue: number,
     segmentNumber: number,
     segmentColors: string[],
-    resultScore: number
+    resultScore: number,
+    segmentStops: number[]
   }) => {
     // Define basic config for the speedometer
     const segmentLabels: Array<object> = [
-        {
-        text: "Very Poor",
-        position: "OUTSIDE",
-        color: "#555"
-        },
         {
         text: "Poor",
         position: "OUTSIDE",
@@ -27,11 +23,6 @@ const Speedometer = (
         },
         {
         text: "Good",
-        position: "OUTSIDE",
-        color: "#555"
-        },
-        {
-        text: "Excellent",
         position: "OUTSIDE",
         color: "#555"
         }
@@ -47,9 +38,10 @@ const Speedometer = (
           value={props.resultScore}
           needleColor={"#434345"}
           needleHeightRatio={0.78}
-          currentValueText={""}
+          currentValueText={"   "}
           customSegmentLabels={segmentLabels}
           segmentColors={props.segmentColors}
+          customSegmentStops={props.segmentStops}
         />
       </>
     );

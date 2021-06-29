@@ -1,32 +1,41 @@
-import React, { useState, useContext } from "react";
+import { useEffect, useContext } from "react";
 import {
-  Center,
   FormControl,
   FormLabel,
   FormErrorMessage,
-  FormHelperText,
   Input,
   Button,
-  Box,
-  Stack
+  Box
 } from "@chakra-ui/react";
 import AppContext from '../store/AppContext'
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
-import { Formik, Form, Field, ErrorMessage, FormikErrors, FormikProps, useFormik } from 'formik';
+import { useMutation, gql } from '@apollo/client';
+import { Formik, Form, Field } from 'formik';
 
 
-type event = {
-  value: React.ChangeEvent<HTMLInputElement>
+const LOGIN = gql`
+mutation Login($username: String!, $password: String!) {
+	login(options: {username: $username, password: $password}) {
+    user {
+      id
+      username
+    }
+  }
 }
+`;
 
-interface MyFormValues {
+interface loginInput {
   username: string,
-  password: string,
+  password: string
 }
 
-const validate = (values: MyFormValues) => {
-  const errors: MyFormValues = { username: '', password: '' };
+const validate = (values: loginInput) => {
+
+
+  const errors: loginInput = { username: '', password: '' };
+
+
   if (!values.username) {
     errors.username = 'Required';
   }
@@ -41,7 +50,7 @@ const LoginForm = () => {
 
   const globalState = useContext(AppContext)
 
-  const initialValues: MyFormValues = { username: '', password: '' }
+  const initialValues: loginInput = { username: '', password: '' }
 
   function validateUsername(value: string) {
     let error
@@ -61,21 +70,32 @@ const LoginForm = () => {
 
   const history = useHistory();
 
+  // apollo hook mutation
+  const [login] = useMutation(LOGIN);
+
+    // Scrolling the page to top whenever being rendered
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <Box minW={['100%', '35%']} w={['100%', '35%']} px={12} py={28} borderRadius={20} boxShadow="base">
       <Formik
         initialValues={initialValues}
-        onSubmit={(values, actions) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2))
-            globalState.setAuthenticated(!globalState.authenticated)
-            localStorage.setItem('user', 'tokenabcdef')
-            actions.setSubmitting(false)
-            history.push('/home')
-          }, 1000)
+        onSubmit={async (values, actions) => {
+          login({ variables: values })
+            .then((res) => {
+              globalState.setAuthenticated(true);
+              window.localStorage.setItem("user", "true")
+              history.push("/home")
+            })
+
+            .catch((err) => {
+              actions.setStatus(err.message)
+            })
         }}
       >
-        {(props) => (
+        {({ status, isSubmitting, errors }) => (
           <Form>
             <Field name="username" validate={validateUsername}>
               {({ field, form }: { field: string, form: any }) => (
@@ -90,16 +110,17 @@ const LoginForm = () => {
               {({ field, form }: { field: string, form: any }) => (
                 <FormControl mt={10} isInvalid={form.errors.password && form.touched.password}>
                   <FormLabel htmlFor="password">Password</FormLabel>
-                  <Input {...field} id="password" />
+                  <Input type="password" {...field} id="password" />
                   <FormErrorMessage>{form.errors.password}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
+            {status}
             <Button
               mt={10}
               w={['100%', '100%']}
               colorScheme="teal"
-              isLoading={props.isSubmitting}
+              isLoading={isSubmitting}
               type="submit"
             >
               Login

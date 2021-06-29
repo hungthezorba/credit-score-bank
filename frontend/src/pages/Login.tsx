@@ -16,7 +16,7 @@ function Login() {
 
     return (
         <Box>
-            <Center>
+            <Center pb={10} mt={30}>
                 <LoginForm />
             </Center>
         </Box>
