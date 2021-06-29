@@ -103,7 +103,7 @@ const FileUpload = () => {
     const formData = new FormData();
     formData.append("file", file);
 
-    let url = "http://localhost:5000/predict";
+    let url = "http://ec2-18-141-204-251.ap-southeast-1.compute.amazonaws.com:5000/predict";
 
     axios
       .post(url, formData, {
