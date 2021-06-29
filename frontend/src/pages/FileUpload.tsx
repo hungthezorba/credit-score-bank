@@ -402,12 +402,7 @@ const FileUpload = () => {
                         })
                         .catch((err) => {
                           alert(
-                            JSON.stringify(
-                              err.graphQLErrors[0].extensions.validationErrors
-                                .message,
-                              null,
-                              2
-                            )
+                            JSON.stringify(err, null, 2)
                           );
                           actions.setStatus(err.message);
                         });

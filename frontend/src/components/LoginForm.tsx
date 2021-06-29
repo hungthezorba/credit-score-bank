@@ -1,20 +1,17 @@
-import React, { useState, useContext } from "react";
+import { useEffect, useContext } from "react";
 import {
-  Center,
   FormControl,
   FormLabel,
   FormErrorMessage,
-  FormHelperText,
   Input,
   Button,
-  Box,
-  Stack
+  Box
 } from "@chakra-ui/react";
 import AppContext from '../store/AppContext'
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import { useMutation, gql } from '@apollo/client';
-import { Formik, Form, Field, ErrorMessage, FormikErrors, FormikProps, useFormik } from 'formik';
+import { Formik, Form, Field } from 'formik';
 
 
 const LOGIN = gql`
@@ -75,6 +72,11 @@ const LoginForm = () => {
 
   // apollo hook mutation
   const [login] = useMutation(LOGIN);
+
+    // Scrolling the page to top whenever being rendered
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <Box minW={['100%', '35%']} w={['100%', '35%']} px={12} py={28} borderRadius={20} boxShadow="base">
