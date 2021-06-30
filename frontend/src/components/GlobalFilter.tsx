@@ -2,6 +2,7 @@ import React from "react";
 import { Input, Flex } from "@chakra-ui/react";
 import "../assets/css/Table.css";
 import { useQuery, gql } from "@apollo/client";
+import { Spinner, Center } from "@chakra-ui/react";
 
 const CUS_CREDIT_HISTORY_LIST = gql`
   query CustomerCreditHistoryList {
@@ -35,7 +36,19 @@ const GlobalFilter: React.FC = () => {
     return humanDateFormat;
   };
   if (loading) {
-    return <></>;
+    return (
+      <>
+      <Center style={{paddingTop: 100}}>
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
+        />
+        </Center>
+      </>
+    );
   } else {
     return (
       <>
