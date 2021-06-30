@@ -10,13 +10,11 @@ import {
   Arg,
   Ctx,
   Field,
-  FieldResolver,
   InputType,
   Mutation,
   ObjectType,
   Query,
   Resolver,
-  Root,
 } from "type-graphql";
 import { Repository } from "typeorm";
 import { InjectRepository } from "typeorm-typedi-extensions";
@@ -166,27 +164,38 @@ export default class CustomerResolver extends CustomerTemplateResolver {
 
   @Query(() => Customer)
   async customer(@Arg("id") id: number) {
-    const customer = await this.customerRepository.findOne(id);
+    const customer = await this.customerRepository.findOne({
+      relations: ["creditHistoryList"],
+      where: { id: id },
+    });
     if (!customer) {
       throw new ApolloError(
         "Validation Error: fail to get a customer due to validation errrors",
         "BAD_USER_INPUT"
       );
     }
-    console.log(typeof customer.dateOfBirth);
     return customer;
   }
 
-  @FieldResolver(() => [CreditHistory])
-  async creditHistoryList(@Root() getOneCustomer: Customer) {
-    const customerId = getOneCustomer.id;
-    console.log("FieldResolver:", customerId);
-    const creditHistoryList = await this.creditHistoryRepository.find({
-      customer: { id: customerId },
+  @Query(() => [Customer])
+  async customers(): Promise<Customer[]> {
+    const customers = await this.customerRepository.find({
+      relations: ["creditHistoryList"],
     });
-    if (creditHistoryList) {
-      return creditHistoryList;
-    }
-    return null;
+    console.log("Fetch length: ", customers.length);
+    return customers;
   }
+
+  // @FieldResolver(() => [CreditHistory])
+  // async creditHistoryList(@Root() customer: Customer) {
+  //   const customerId = customer.id;
+  //   console.log("FieldResolver id:", customerId);
+  //   const creditHistoryList = await this.creditHistoryRepository.find({
+  //     customer: { id: customerId },
+  //   });
+  //   if (creditHistoryList) {
+  //     return creditHistoryList;
+  //   }
+  //   return null;
+  // }
 }

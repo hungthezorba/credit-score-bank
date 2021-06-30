@@ -15,6 +15,7 @@ import connectRedis from "connect-redis";
 import { COOKIE_NAME, __prod__ } from "./constants";
 import { UserResolver } from "./resolver/User.resolver";
 import CustomerResolver from "./resolver/Customer.resolver";
+import { createCreditHistoryLoader } from "./loader/createCreditHistoryLoader";
 
 // *** MAIN Node.js Application *** //
 (async () => {
@@ -97,7 +98,12 @@ import CustomerResolver from "./resolver/Customer.resolver";
       validate: false,
       container: Container,
     }),
-    context: ({ req, res }) => ({ em: connection.manager, req, res }),
+    context: ({ req, res }) => ({
+      em: connection.manager,
+      req,
+      res,
+      creditHistoryLoader: createCreditHistoryLoader(),
+    }),
     playground: !__prod__,
     introspection: !__prod__,
   });
