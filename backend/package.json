@@ -10,7 +10,7 @@
     "@types/graphql": "^14.5.0",
     "@types/node": "^8.10.66",
     "@types/validator": "^13.1.4",
-    "nodemon": "^2.0.7",
+    "nodemon": "^2.0.8",
     "ts-node": "3.3.0",
     "tsconfig-paths": "^3.9.0",
     "typescript": "^3.9.9"
