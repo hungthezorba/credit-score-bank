@@ -18,6 +18,7 @@ export class Customer extends TemplateEntity {
   @Column({ type: "date", nullable: true })
   dateOfBirth: Date;
 
+  @Field(() => [CreditHistory])
   @OneToMany(() => CreditHistory, (creditHistory) => creditHistory.customer)
   creditHistoryList: CreditHistory[];
 
