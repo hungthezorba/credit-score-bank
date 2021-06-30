@@ -118,6 +118,7 @@ const FileUpload = () => {
       .catch((error) => {
         console.log(JSON.stringify(error, null, 2));
         alert("Error happened. Try uploading the file again!");
+        deleteOption();
       });
   }
 

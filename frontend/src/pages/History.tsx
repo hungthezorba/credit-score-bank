@@ -5,6 +5,8 @@ const History = () => {
     
     // Import search icon
     useEffect(() => {
+        window.scrollTo(0, 0);
+        
         const script = document.createElement('script');
       
         script.src = "https://kit.fontawesome.com/62b2ff62ed.js";
