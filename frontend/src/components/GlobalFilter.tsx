@@ -45,36 +45,38 @@ const GlobalFilter: React.FC = () => {
             <i className="fas fa-search" style={{fontSize: "35px" , marginLeft:"10px"}}></i>
         </Flex>
         </Flex>
+        {loading ? <></> : 
+            (
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Negative Score</th>
+                        <th>Positive Score</th>
+                        <th>Created At</th>
+                        <th>Data Of Birth</th>
+                    </tr>
+                    {data.customers.map((val:any) => {
+                        const { id , lastName, firstName, creditHistoryList , dateOfBirth} = val
+                        const score  = creditHistoryList[0]
+                        const dateFormated = convertDate(score.createdAt)
+                        if (filter == "" || val.firstName.toLocaleLowerCase().includes(filter.toLocaleLowerCase())){
+                            return (
+                                <tr>
+                                    <td>{firstName} {lastName}</td>
+                                    <td>{score.negScore}</td>
+                                    <td>{score.posScore}</td>
+                                    <td>{dateFormated}</td>
+                                    <td>{dateOfBirth}</td>
+                                </tr>
+                            )
+                        }
+                        
+                    })}
+                    
+                </table>
+            )
+        }
         
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Negative Score</th>
-                <th>Positive Score</th>
-                <th>Created At</th>
-                <th>Data Of Birth</th>
-            </tr>
-            {data.customers.map((val:any) => {
-                const { id , lastName, firstName, creditHistoryList , dateOfBirth} = val
-                const score  = creditHistoryList[0]
-                const dateFormated = convertDate(score.createdAt)
-                if (filter == "" || val.firstName.toLocaleLowerCase().includes(filter.toLocaleLowerCase())){
-                    return (
-                        <tr>
-                            <td>{firstName} {lastName}</td>
-                            <td>{score.negScore}</td>
-                            <td>{score.posScore}</td>
-                            <td> {dateFormated}</td>
-                            <td>{dateOfBirth}</td>
-                                    
-                                    
-                        </tr>
-                    )
-                }
-                
-            })}
-            
-        </table>
         </>
         
        
