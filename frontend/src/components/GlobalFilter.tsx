@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Input, Flex } from "@chakra-ui/react";
 import "../assets/css/Table.css";
 import { useQuery, gql } from "@apollo/client";
-import { Spinner, Center } from "@chakra-ui/react";
+import { Spinner, Center, Spacer, Button } from "@chakra-ui/react";
+import { RepeatClockIcon } from "@chakra-ui/icons";
 
 const CUS_CREDIT_HISTORY_LIST = gql`
   query CustomerCreditHistoryList {
@@ -28,31 +29,43 @@ const GlobalFilter: React.FC = () => {
     setFilter(event.target.value);
   };
 
-  const { loading, data, error } = useQuery(CUS_CREDIT_HISTORY_LIST);
-  const convertDate = (unixTimestamp: number) => {
-    unixTimestamp /= 1;
-    const result = new Date(unixTimestamp);
-    const humanDateFormat = result.toLocaleString();
-    return humanDateFormat;
-  };
+  const { loading, data } = useQuery(CUS_CREDIT_HISTORY_LIST);
+  const [isLoading, setIsLoading] = useState(false);
+
   if (loading) {
     return (
       <>
-      <Center style={{paddingTop: 100}}>
-        <Spinner
-          thickness="4px"
-          speed="0.65s"
-          emptyColor="gray.200"
-          color="blue.500"
-          size="xl"
-        />
+        <Center style={{ paddingTop: 100 }}>
+          <Spinner
+            thickness="4px"
+            speed="0.65s"
+            emptyColor="gray.200"
+            color="#196b69"
+            size="xl"
+          />
         </Center>
       </>
     );
   } else {
     return (
       <>
-        <Flex alignItems="flex-end" justifyContent="flex-end">
+        <Flex style={{ paddingBottom: 10 }}>
+          <div style={{ marginLeft: "40px" }}>
+            <Button
+              isLoading={isLoading}
+              leftIcon={<RepeatClockIcon />}
+              colorScheme="orange"
+              variant="solid"
+              onClick={() => {
+                window.location.reload();
+                setIsLoading(true);
+              }}
+            >
+              Reload
+            </Button>
+          </div>
+
+          <Spacer />
           <Flex style={{ marginRight: "40px" }}>
             <Input
               value={filter || ""}
@@ -104,7 +117,8 @@ const GlobalFilter: React.FC = () => {
                     <td>{(score.negScore * 100).toFixed(2)}</td>
                     <td>{(score.posScore * 100).toFixed(2)}</td>
                     <td>
-                      {date +
+                      {(date < 10 ? "0" : "") +
+                        date +
                         "-" +
                         (month < 10 ? "0" : "") +
                         month +
