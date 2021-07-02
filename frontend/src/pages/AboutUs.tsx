@@ -340,7 +340,8 @@ function AboutUs() {
                   <div className="member-info">
                     <h4>Duy Vu</h4>
                     <span>Business Analyst, Marketing Researcher</span>
-                    <p>hm ..............</p>
+                    <p>I always want to be a better man every day,</p>
+                    <p>especially with people whom I love</p>
                   </div>
                 </div>
               </div>
