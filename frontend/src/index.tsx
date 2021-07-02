@@ -12,7 +12,7 @@ import {
 } from "@apollo/client";
 
 const link = createHttpLink({
-  uri: "http://localhost:4000/graphql",
+  uri: "https://api.minhthings.com/graphql",
   credentials: 'include'
 })
 
