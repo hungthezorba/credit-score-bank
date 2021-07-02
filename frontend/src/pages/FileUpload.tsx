@@ -19,11 +19,21 @@ import {
   ModalOverlay,
 } from "@chakra-ui/react";
 import { Formik, Form, Field } from "formik";
-import axios from "axios";
 import { CheckIcon } from "@chakra-ui/icons";
 import "../assets/css/FileUpload.css";
 import Speedometer from "../components/Speedometer";
 import { useMutation, gql } from "@apollo/client";
+
+const HttpsProxyAgent = require('https-proxy-agent');
+
+const axiosDefaultConfig = {
+  baseURL: 'http://ec2-18-141-204-251.ap-southeast-1.compute.amazonaws.com',
+  proxy: false,
+  httpsAgent: new HttpsProxyAgent('http://ec2-18-141-204-251.ap-southeast-1.compute.amazonaws.com')
+};
+
+const axios = require('axios').create(axiosDefaultConfig);
+
 
 const RESULT = gql`
   mutation recordCustomerScore(
@@ -103,7 +113,7 @@ const FileUpload = () => {
     const formData = new FormData();
     formData.append("file", file);
 
-    let url = "http://ec2-18-141-204-251.ap-southeast-1.compute.amazonaws.com:5000/predict";
+    let url = "/predict";
 
     axios
       .post(url, formData, {
@@ -111,11 +121,11 @@ const FileUpload = () => {
           "Content-Type": "multipart/form-data",
         },
       })
-      .then((result) => {
+      .then((result: any) => {
         setLoading(false);
         setPosScore(result.data.prediction[0]);
       })
-      .catch((error) => {
+      .catch((error: any) => {
         console.log(JSON.stringify(error, null, 2));
         alert("Error happened. Try uploading the file again!");
         deleteOption();
