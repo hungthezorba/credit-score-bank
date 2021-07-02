@@ -23,16 +23,10 @@ import { CheckIcon } from "@chakra-ui/icons";
 import "../assets/css/FileUpload.css";
 import Speedometer from "../components/Speedometer";
 import { useMutation, gql } from "@apollo/client";
+import axios from 'axios';
 
 const HttpsProxyAgent = require('https-proxy-agent');
 
-const axiosDefaultConfig = {
-  baseURL: 'http://ec2-18-141-204-251.ap-southeast-1.compute.amazonaws.com',
-  proxy: false,
-  httpsAgent: new HttpsProxyAgent('http://ec2-18-141-204-251.ap-southeast-1.compute.amazonaws.com')
-};
-
-const axios = require('axios').create(axiosDefaultConfig);
 
 
 const RESULT = gql`
@@ -113,7 +107,7 @@ const FileUpload = () => {
     const formData = new FormData();
     formData.append("file", file);
 
-    let url = "/predict";
+    let url = "https://7cceeafe3f32.ngrok.io/predict";
 
     axios
       .post(url, formData, {
