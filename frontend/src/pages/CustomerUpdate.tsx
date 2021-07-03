@@ -33,6 +33,7 @@ const CUSTOMER = gql`
       }
     ) {
       customer {
+        id
         firstName
         lastName
         dateOfBirth
@@ -44,6 +45,9 @@ const CUSTOMER = gql`
 const CustomerUpdate = () => {
   // Check if the customer created successfully
   const [validate, setValidate] = useState(false);
+
+  // Customer id after creating
+  const [id, setId] = useState(0);
 
   function validateFirstName(value: any) {
     let error;
@@ -99,7 +103,8 @@ const CustomerUpdate = () => {
             initialValues={{ firstName: "", lastName: "", dateOfBirth: "" }}
             onSubmit={(values, actions) => {
               customer({ variables: values })
-                .then(() => {
+                .then((data) => {
+                  setId(data.data.registerCustomer.customer.id);
                   setValidate(true);
                   setTimeout(() => {
                     window.location.reload();
@@ -217,6 +222,9 @@ const CustomerUpdate = () => {
                           >
                             Created successfully!
                           </p>
+                        </Flex>
+                        <Flex style={{ marginLeft: "50px", marginTop: "5px" }}>
+                          <p>Customer ID: {id}</p>
                         </Flex>
                       </ModalBody>
                     </ModalContent>

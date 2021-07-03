@@ -107,7 +107,7 @@ const FileUpload = () => {
     const formData = new FormData();
     formData.append("file", file);
 
-    let url = "https://7cceeafe3f32.ngrok.io/predict";
+    let url = "http://localhost:5000/predict";
 
     axios
       .post(url, formData, {

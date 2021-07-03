@@ -96,7 +96,7 @@ function AboutUs() {
                     </li>
                     <li>
                       <i className="ri-check-double-line"></i>+ Our customer
-                      infomation is never sold to third parties.
+                      information is never sold to third parties.
                     </li>
                     <li>
                       <i className="ri-check-double-line"></i>+ 128-bit
@@ -150,7 +150,7 @@ function AboutUs() {
                           data-bs-parent=".accordion-list"
                         >
                           <MDBCollapse show={showFirstElement}>
-                            There are serveral common factors that affect your
+                            There are several common factors that affect your
                             credit score which are payment history, credit
                             usage, length of credit history, recent activity and
                             types of account.
@@ -163,7 +163,7 @@ function AboutUs() {
                           onClick={toggleSecondElement}
                           className={`second ques ${setActive2}`}
                         >
-                          <span>02</span> Why you need a good creadit score ?{" "}
+                          <span>02</span> Why you need a good credit score ?{" "}
                           <i
                             className={`bx bx-chevron-down icon-close ${rotate2}`}
                           ></i>
@@ -375,7 +375,7 @@ function AboutUs() {
                   <div className="member-info">
                     <h4>Thao Vu</h4>
                     <span>Business Analyst, Marketing Researcher</span>
-                    <p>Many people often get confusued about my age.</p>
+                    <p>Many people often get confused about my age.</p>
                   </div>
                 </div>
               </div>

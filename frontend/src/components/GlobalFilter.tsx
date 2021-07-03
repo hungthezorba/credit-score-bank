@@ -88,54 +88,62 @@ const GlobalFilter: React.FC = () => {
             <th>Negative Score</th>
             <th>Positive Score</th>
             <th>Created At</th>
-            <th>Data Of Birth</th>
+            <th>Date Of Birth</th>
           </tr>
           {data.customers.map((val: any) => {
             const { id, lastName, firstName, creditHistoryList, dateOfBirth } =
               val;
-            const score = creditHistoryList[0];
+            const score = creditHistoryList;
 
-            if (!(score == undefined)) {
-              const now = new Date(score.createdAt * 1);
+            return (
+              <tbody>
+                {score.map((value: any) => {
+                  if (!(value == undefined)) {
+                    const now = new Date(value.createdAt * 1);
 
-              var year = now.getFullYear();
-              var month = now.getMonth() + 1;
-              var date = now.getDate();
+                    var hour = now.toLocaleTimeString();
+                    console.log(hour);
+                    var year = now.getFullYear();
+                    var month = now.getMonth() + 1;
+                    var date = now.getDate();
 
-              if (
-                filter == "" ||
-                val.firstName
-                  .toLocaleLowerCase()
-                  .includes(filter.toLocaleLowerCase())
-              ) {
-                return (
-                  <tr>
-                    <td>{id}</td>
-                    <td>
-                      {firstName} {lastName}
-                    </td>
-                    <td>{(score.negScore * 100).toFixed(2)}</td>
-                    <td>{(score.posScore * 100).toFixed(2)}</td>
-                    <td>
-                      {(date < 10 ? "0" : "") +
-                        date +
-                        "-" +
-                        (month < 10 ? "0" : "") +
-                        month +
-                        "-" +
-                        year}
-                    </td>
-                    <td>
-                      {dateOfBirth.substring(8, 10) +
-                        "-" +
-                        dateOfBirth.substring(5, 7) +
-                        "-" +
-                        dateOfBirth.substring(0, 4)}
-                    </td>
-                  </tr>
-                );
-              }
-            }
+                    if (
+                      filter == "" ||
+                      val.firstName
+                        .toLocaleLowerCase()
+                        .includes(filter.toLocaleLowerCase())
+                    ) {
+                      return (
+                        <tr>
+                          <td>{id}</td>
+                          <td>
+                            {firstName} {lastName}
+                          </td>
+                          <td>{(value.negScore * 100).toFixed(2)}</td>
+                          <td>{(value.posScore * 100).toFixed(2)}</td>
+                          <td>
+                            {hour + " " + (date < 10 ? "0" : "") +
+                              date +
+                              "-" +
+                              (month < 10 ? "0" : "") +
+                              month +
+                              "-" +
+                              year}
+                          </td>
+                          <td>
+                            {dateOfBirth.substring(8, 10) +
+                              "-" +
+                              dateOfBirth.substring(5, 7) +
+                              "-" +
+                              dateOfBirth.substring(0, 4)}
+                          </td>
+                        </tr>
+                      );
+                    }
+                  }
+                })}
+              </tbody>
+            );
           })}
         </table>
       </>
